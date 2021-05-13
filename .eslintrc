@@ -19,6 +19,7 @@
           ".jsx"
         ]
       }
-    ]
+    ],
+    "import/no-useless-path-segments": "warn"
   }
 }
