@@ -3,6 +3,7 @@ import './App.css';
 import Header from '../../components/Header/Header';
 import PhotoGrid from '../../components/PhotoGrid/PhotoGrid';
 import Footer from '../../components/Footer/Footer';
+import Popup from '../../components/Popup/Popup';
 
 function App() {
 
@@ -13,9 +14,7 @@ function App() {
         <PhotoGrid/>
       </main>
       <Footer/>
-      {/* <div className="popup"> */}
-
-      {/* </div> */}
+      <Popup/>
     </div>
   );
 }
