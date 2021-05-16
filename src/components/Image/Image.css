@@ -1,0 +1,11 @@
+.photo-grid-img {
+  min-width: 229px;
+  width: 100%;
+  min-height: 142px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.photo-grid-img:hover {
+  opacity: 0.9;
+}

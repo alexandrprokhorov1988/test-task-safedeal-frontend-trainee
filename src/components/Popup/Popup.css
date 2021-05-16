@@ -11,6 +11,13 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: all ease 0s;
+}
+
+.popup_opened {
+  transition: all ease .3s;
   visibility: visible;
   opacity: 1;
 }
@@ -22,9 +29,9 @@
   display: grid;
   max-width: 619px;
   width: 100%;
-  min-height: 425px;
-  grid-template-columns: minmax(150px, 331px) auto;
-  grid-template-rows: auto auto;
+  height: 425px;
+  grid-template-columns: minmax(220px, 331px) minmax(180px, 214px);
+  grid-template-rows: 1fr 1fr;
   grid-template-areas: "img comments-container" "form comments-container";
   position: relative;
   transition: all ease .5s;
@@ -56,17 +63,28 @@
 .popup__img {
   grid-area: img;
   width: 100%;
-  /*max-width: 331px;*/
   object-fit: cover;
-  min-height: 205px;
+  height: 205px;
 }
 
 .popup__comments-container {
   grid-area: comments-container;
-  /*width: 100%;*/
-  width: 214px;
-  height: 425px;
-  overflow: scroll;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.popup__comments-container::-webkit-scrollbar {
+  width: 16px;
+}
+
+.popup__comments-container::-webkit-scrollbar-thumb {
+  background: #2196F3;
+  border: 1px solid #DFE5EC;
+}
+
+.popup__comments-container::-webkit-scrollbar-thumb:hover {
+  background: #217cd6;
 }
 
 .popup__comment-container {
@@ -106,10 +124,20 @@
   border-radius: 3px;
   border: 1px solid #CCCCCC;
   height: 30px;
+  box-sizing: border-box;
 }
 
 .popup__form-input:not(:first-of-type) {
   margin-top: 20px;
+}
+
+.popup__form-error {
+  display: block;
+  color: #ff2b06;
+}
+
+.popup__form-error_hide {
+  display: none;
 }
 
 .popup__form-button {
@@ -129,14 +157,18 @@
   background: #457eb3;
 }
 
+.popup__form-button:disabled {
+  background: #87acc0;
+}
+
 @media screen and (max-width: 425px) {
   .popup__container {
     height: 100%;
-    padding: 0;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto 1fr auto;
     grid-template-areas: "img" "comments-container" "form";
     grid-column-gap: 0;
+    padding: 0 0 40px 0;
   }
 
   .popup__form,
@@ -144,8 +176,13 @@
     width: 90%;
   }
 
+  .popup__comment {
+    padding-top: 0;
+  }
+
+
   .popup__comments-container {
     height: 100%;
-    padding-top: 10px;
+    padding-top: 25px;
   }
 }

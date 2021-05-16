@@ -10,10 +10,3 @@
   padding-bottom: 377px;
   box-sizing: border-box;
 }
-
-.photo-grid__img {
-  min-width: 229px;
-  width: 100%;
-  min-height: 142px;
-  object-fit: cover;
-}
