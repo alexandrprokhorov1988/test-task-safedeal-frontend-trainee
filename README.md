@@ -10,7 +10,7 @@
 Тестовое задание представляет адаптивную страницу с выводом фотографий, модальным окном и добавлением комментриев.
 Задание выполнено на React.js.
 
-* [Ссылка на репозиторий с заданием](https://github.com/avito-tech/safedeal-frontend-trainee)
+* [Ссылка на репозиторий с заданием](https://alexandrprokhorov1988.github.io/test-task-safedeal-frontend-trainee/)
 
 #### <a name="instructions">Инструкция</a>
 * [Ссылка на проект]()
