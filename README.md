@@ -13,7 +13,7 @@
 * [Ссылка на репозиторий с заданием](https://alexandrprokhorov1988.github.io/test-task-safedeal-frontend-trainee/)
 
 #### <a name="instructions">Инструкция</a>
-* [Ссылка на проект]()
+* [Ссылка на проект](https://alexandrprokhorov1988.github.io/test-task-safedeal-frontend-trainee/)
 
 Порядок установки локально.
 * Установка зависимостей

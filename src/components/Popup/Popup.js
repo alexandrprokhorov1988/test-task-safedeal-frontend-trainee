@@ -94,10 +94,11 @@ Popup.propTypes = {
   onClose: PropTypes.func.isRequired,
   isLoadingComment: PropTypes.bool.isRequired,
   onSubmitComment: PropTypes.func.isRequired,
-  currentOriginSizeImage: PropTypes.objectOf(PropTypes.object).isRequired,
+  currentOriginSizeImage: PropTypes.shape({
+    id: PropTypes.number,
+    url: PropTypes.string
+  }).isRequired,
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Popup;
-
-
