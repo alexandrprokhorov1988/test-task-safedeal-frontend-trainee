@@ -35,7 +35,7 @@ class MainApi {
       });
   }
 
-  setNewComment(id, name, comment) {
+  setNewComment({id, name, comment}) {
     return fetch(`${this._baseurl}/${id}/comments`, {
       method: 'POST',
       headers: {

@@ -4,9 +4,9 @@ import Header from '../../components/Header/Header';
 import PhotoGrid from '../../components/PhotoGrid/PhotoGrid';
 import Footer from '../../components/Footer/Footer';
 import Popup from '../../components/Popup/Popup';
-// import mainApi from '../../utils/MainApi';
 import Preloader from '../../components/Preloader/Preloader';
 import mainApi from "../../utils/mainApi";
+import {dateParseFromTimestampToString} from "../../utils/helpers";
 
 function App() {
   const [cards, setCards] = React.useState([]);
@@ -17,56 +17,29 @@ function App() {
   const [comments, setComments] = React.useState([]);
 
   React.useEffect(() => {
-    setCards([
-      {
-        "id": 237,
-        "url": "https://picsum.photos/id/237/300/200"
-      },
-      {
-        "id": 238,
-        "url": "https://picsum.photos/id/238/300/200"
-      },
-      {
-        "id": 239,
-        "url": "https://picsum.photos/id/239/300/200"
-      },
-      {
-        "id": 240,
-        "url": "https://picsum.photos/id/240/300/200"
-      },
-      {
-        "id": 241,
-        "url": "https://picsum.photos/id/241/300/200"
-      },
-      {
-        "id": 242,
-        "url": "https://picsum.photos/id/242/300/200"
-      }
-    ])
+    setIsLoading(true);
+    mainApi.getInitialImages()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() =>
+        setIsLoading(false)
+      )
   }, []);
-  // React.useEffect(() => {
-  //   setIsLoading(true);
-  //   mainApi.getInitialImages()
-  //     .then((data) => {
-  //       // setCards(data);
-  //       console.log(data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  //     .finally(() =>
-  //       setIsLoading(false)
-  //     )
-  // }, []);
 
   function handlePopupOpen() {
     setIsOpenPopup(true);
     document.addEventListener('keydown', handleEscClose);
+    document.body.style.overflow = "hidden";
   }
 
   function closePopup() {
     setIsOpenPopup(false);
     document.removeEventListener('keydown', handleEscClose);
+    document.body.style.overflow = "auto";
   }
 
   function handleEscClose(e) {
@@ -86,23 +59,33 @@ function App() {
             id: res.id,
             url: res.url
           });
-          setComments(res.comments);
+          const newComments = res.comments.map((comment) => ({
+            text: comment.text,
+            date: dateParseFromTimestampToString(comment.date),
+            id: comment.id
+          }));
+          setComments(newComments);
           handlePopupOpen();
         })
         .catch((err) => console.log(err));
     }
+    return true;
   }
 
   function handleSubmitComment(values, imageId) {
-    const obj = {
-      id: Math.random(),
-      text: values.comment,
-      date: new Date().getTime()
-    };
     setIsLoadingComment(true);
-    return mainApi.setNewComment(imageId, values.name, values.comment)
+    return mainApi.setNewComment({
+      id: imageId,
+      name: values.name,
+      comment: values.comment
+    })
       .then(() => {
-        setComments([...comments, obj]);
+        const answerFromServer = {
+          id: Math.random(),
+          text: values.comment,
+          date: dateParseFromTimestampToString(new Date().getTime())
+        };
+        setComments([...comments, answerFromServer]);
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoadingComment(false));
@@ -122,7 +105,7 @@ function App() {
       </main>
       <Footer/>
       <Popup
-        isPopupOpen={isOpenPopup}
+        isOpenPopup={isOpenPopup}
         onClose={closePopup}
         isLoadingComment={isLoadingComment}
         onSubmitComment={handleSubmitComment}

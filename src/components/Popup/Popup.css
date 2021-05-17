@@ -30,7 +30,7 @@
   max-width: 619px;
   width: 100%;
   height: 425px;
-  grid-template-columns: minmax(220px, 331px) minmax(180px, 214px);
+  grid-template-columns: minmax(190px, 331px) minmax(140px, 214px);
   grid-template-rows: 1fr 1fr;
   grid-template-areas: "img comments-container" "form comments-container";
   position: relative;
@@ -72,6 +72,7 @@
   width: 100%;
   height: 100%;
   overflow: auto;
+  direction: rtl;
 }
 
 .popup__comments-container::-webkit-scrollbar {
@@ -79,18 +80,18 @@
 }
 
 .popup__comments-container::-webkit-scrollbar-thumb {
-  background: #2196F3;
-  border: 1px solid #DFE5EC;
+  border: 1px solid #CCCCCC;
 }
 
 .popup__comments-container::-webkit-scrollbar-thumb:hover {
-  background: #217cd6;
+  border: 1px solid #878787;
 }
 
 .popup__comment-container {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-end;
+  padding-left: 5px;
 }
 
 .popup__comment-container:not(:first-of-type) {
@@ -115,8 +116,19 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 29px;
   align-self: end;
+}
+
+.popup__form-error {
+  visibility: visible;
+  color: #ff2b06;
+  font-size: 9px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.popup__form-error_hide {
+  visibility: hidden;
 }
 
 .popup__form-input {
@@ -125,24 +137,12 @@
   border: 1px solid #CCCCCC;
   height: 30px;
   box-sizing: border-box;
-}
-
-.popup__form-input:not(:first-of-type) {
-  margin-top: 20px;
-}
-
-.popup__form-error {
-  display: block;
-  color: #ff2b06;
-}
-
-.popup__form-error_hide {
-  display: none;
+  width: 100%;
 }
 
 .popup__form-button {
   height: 30px;
-  background: #4997D0;
+  background: #0a6bd0d9;
   border-radius: 3px;
   color: #FFFFFF;
   font-size: 13px;
@@ -154,11 +154,13 @@
 }
 
 .popup__form-button:hover {
-  background: #457eb3;
+  background: #0a54a8;
 }
 
 .popup__form-button:disabled {
-  background: #87acc0;
+  background: #4997D0;
+  cursor: none;
+  pointer-events: none;
 }
 
 @media screen and (max-width: 425px) {
@@ -169,6 +171,7 @@
     grid-template-areas: "img" "comments-container" "form";
     grid-column-gap: 0;
     padding: 0 0 40px 0;
+    grid-row-gap: 20px;
   }
 
   .popup__form,
@@ -176,13 +179,17 @@
     width: 90%;
   }
 
-  .popup__comment {
-    padding-top: 0;
-  }
-
-
   .popup__comments-container {
     height: 100%;
-    padding-top: 25px;
+    direction: ltr;
+  }
+
+  .popup__comment-container {
+    align-items: flex-start;
+  }
+
+  .popup__comment {
+    padding-top: 0;
+    padding-left: 0;
   }
 }
