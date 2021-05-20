@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Рендер footer с текстом jestio 1`] = `
+<footer
+  className="footer"
+>
+  <p
+    className="footer__text"
+  >
+    © 2018-2019-2021
+  </p>
+</footer>
+`;

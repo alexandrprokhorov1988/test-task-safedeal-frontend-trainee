@@ -1,16 +1,14 @@
 import {BASE_URL} from "./config";
 
 class MainApi {
-  constructor({ baseUrl }) {
+  constructor({ baseUrl, headers }) {
     this._baseurl = baseUrl;
+    this._headers = headers;
   }
 
   getInitialImages() {
     return fetch(`${this._baseurl}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers
     })
       .then((res) => {
         if (res.ok) {
@@ -22,10 +20,7 @@ class MainApi {
 
   getOriginalSizeImage(id) {
     return fetch(`${this._baseurl}/${id}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
     })
       .then((res) => {
         if (res.ok) {
@@ -35,13 +30,10 @@ class MainApi {
       });
   }
 
-  setNewComment({id, name, comment}) {
+  setNewComment({ id, name, comment }) {
     return fetch(`${this._baseurl}/${id}/comments`, {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({ name, comment })
     })
       .then((res) => {
@@ -53,6 +45,12 @@ class MainApi {
   }
 }
 
-const mainApi = new MainApi({ baseUrl: BASE_URL });
+const mainApi = new MainApi({
+  baseUrl: BASE_URL,
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  }
+});
 
 export default mainApi

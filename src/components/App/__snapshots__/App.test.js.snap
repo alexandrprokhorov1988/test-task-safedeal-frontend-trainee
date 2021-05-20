@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App snapshot 1`] = `
+<div
+  className="page"
+>
+  <footer
+    className="header"
+  >
+    <h1
+      className="header__title"
+    >
+      Test APP
+    </h1>
+  </footer>
+  <main
+    className="content"
+  >
+    <section
+      className="photo-grid"
+    />
+  </main>
+  <footer
+    className="footer"
+  >
+    <p
+      className="footer__text"
+    >
+      © 2018-2019-2021
+    </p>
+  </footer>
+  <div
+    aria-hidden="true"
+    className="popup false"
+    onClick={[Function]}
+    role="button"
+    tabIndex="-1"
+  >
+    <div
+      aria-hidden="true"
+      className="popup__container"
+      onClick={[Function]}
+      role="complementary"
+      tabIndex="-1"
+    >
+      <button
+        className="popup__close-button"
+        onClick={[Function]}
+        type="button"
+      />
+      <img
+        alt="Картинка"
+        className="popup__img"
+      />
+      <div
+        className="popup__comments-container"
+      />
+      <form
+        action="#"
+        className="popup__form"
+        method="get"
+        noValidate={true}
+        onSubmit={[Function]}
+      >
+        <span
+          className="popup__form-error popup__form-error_hide"
+        >
+          
+        </span>
+        <input
+          className="popup__form-input"
+          maxLength="200"
+          minLength="2"
+          name="name"
+          onChange={[Function]}
+          pattern="^[а-яёА-ЯЁa-zA-Z0-9-\\\\s\\\\-]+$"
+          placeholder="Ваше имя"
+          required={true}
+          type="text"
+          value=""
+        />
+        <span
+          className="popup__form-error popup__form-error_hide"
+        >
+          
+        </span>
+        <input
+          className="popup__form-input"
+          maxLength="200"
+          minLength="2"
+          name="comment"
+          onChange={[Function]}
+          pattern="^[а-яёА-ЯЁa-zA-Z0-9-\\\\s\\\\-]+$"
+          placeholder="Ваш комментарий"
+          required={true}
+          type="text"
+          value=""
+        />
+        <button
+          className="popup__form-button"
+          disabled={true}
+          type="submit"
+        >
+          Оставить комментарий
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+`;

@@ -16,20 +16,6 @@ function App() {
   const [currentOriginSizeImage, setCurrentOriginSizeImage] = React.useState({});
   const [comments, setComments] = React.useState([]);
 
-  React.useEffect(() => {
-    setIsLoading(true);
-    mainApi.getInitialImages()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() =>
-        setIsLoading(false)
-      )
-  }, []);
-
   function handlePopupOpen() {
     setIsOpenPopup(true);
     document.addEventListener('keydown', handleEscClose);
@@ -90,6 +76,20 @@ function App() {
       .catch((err) => console.log(err))
       .finally(() => setIsLoadingComment(false));
   }
+
+  React.useEffect(() => {
+    setIsLoading(true);
+    mainApi.getInitialImages()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() =>
+        setIsLoading(false)
+      )
+  }, []);
 
   return (
     <div className="page">

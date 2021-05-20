@@ -12,6 +12,7 @@ const Image = React.memo(({ id, url, onImageClick }) => {
     if (e.key === 'Enter') {
       onImageClick(id);
     }
+    return false;
   }
 
   return (
@@ -22,6 +23,7 @@ const Image = React.memo(({ id, url, onImageClick }) => {
       className="photo-grid-img"
       onClick={handleImageClick}
       onKeyDown={handleKeyDown}
+      tabIndex={0}
       role="presentation"
     />
   );
@@ -31,6 +33,15 @@ Image.propTypes = {
   id: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired,
   onImageClick: PropTypes.func.isRequired
+};
+
+Image.defaultProps = {
+  onClick: () => {
+  },
+  onKeyDown: () => {
+  },
+  id: "",
+  url: ""
 };
 
 export default Image;

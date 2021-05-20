@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PhotoGrid component Проверка snapshot 1`] = `
+<section
+  className="photo-grid"
+>
+  <img
+    alt="Картинка"
+    className="photo-grid-img"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="presentation"
+    src="https://picsum.photos/id/237/300/200"
+    tabIndex={0}
+  />
+</section>
+`;
