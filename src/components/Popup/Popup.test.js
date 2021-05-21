@@ -3,8 +3,6 @@ import {render, unmountComponentAtNode} from "react-dom";
 import renderer from 'react-test-renderer';
 import {act} from "react-dom/test-utils";
 import Popup from './Popup';
-import closePopup from '../../components/App/App';
-import handleSubmitComment from '../../components/App/App';
 
 let container = null;
 beforeEach(() => {
@@ -21,7 +19,7 @@ describe('Popup component', () => {
     const onClose = jest.fn();
     act(() => {
       render(<Popup
-        isOpenPopup={true}
+        isOpenPopup
         onClose={onClose}
         isLoadingComment={false}
         onSubmitComment={onClose}
@@ -40,7 +38,7 @@ describe('Popup component', () => {
     const onSubmitComment = jest.fn();
     act(() => {
       render(<Popup
-        isOpenPopup={true}
+        isOpenPopup
         onClose={onSubmitComment}
         isLoadingComment={false}
         onSubmitComment={onSubmitComment}
@@ -55,18 +53,18 @@ describe('Popup component', () => {
     });
     expect(onSubmitComment).toHaveBeenCalledTimes(1);
   });
-  
+
   it('Popup snapshot', () => {
-    const render = renderer
+    const result = renderer
       .create(<Popup
-        isOpenPopup={true}
-        onClose={closePopup}
+        isOpenPopup
+        onClose={()=>{}}
         isLoadingComment={false}
-        onSubmitComment={handleSubmitComment}
+        onSubmitComment={()=>{}}
         comments={[{ text: "Крутая фотка", date: "03.01.2020", id: 153 }]}
         currentOriginSizeImage={{ id: 237, url: "https://picsum.photos/id/237/600/400" }}
       />)
       .toJSON();
-    expect(render).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
   });
 });

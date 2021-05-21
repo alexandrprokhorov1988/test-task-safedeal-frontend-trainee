@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import {connect} from 'react-redux';
 import Header from '../../components/Header/Header';
 import PhotoGrid from '../../components/PhotoGrid/PhotoGrid';
 import Footer from '../../components/Footer/Footer';
@@ -7,14 +8,20 @@ import Popup from '../../components/Popup/Popup';
 import Preloader from '../../components/Preloader/Preloader';
 import mainApi from "../../utils/mainApi";
 import {dateParseFromTimestampToString} from "../../utils/helpers";
+import {setIsLoading, setIsLoadingComment, setIsOpenPopup} from "../../redux/actions/mainActions";
+import {setCards, setComments, setOriginSizeImage} from "../../redux/actions/cardsActions";
 
-function App() {
-  const [cards, setCards] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [isLoadingComment, setIsLoadingComment] = React.useState(false);
-  const [isOpenPopup, setIsOpenPopup] = React.useState(false);
-  const [currentOriginSizeImage, setCurrentOriginSizeImage] = React.useState({});
-  const [comments, setComments] = React.useState([]);
+function App(
+  {
+    cards,
+    main,
+    setIsOpenPopup,
+    setIsLoadingComment,
+    setIsLoading,
+    setOriginSizeImage,
+    setComments,
+    setCards
+  }) {
 
   function handlePopupOpen() {
     setIsOpenPopup(true);
@@ -35,13 +42,13 @@ function App() {
   }
 
   function handleGetOriginalSizeImage(imageId) {
-    if (imageId === currentOriginSizeImage.id) {
+    if (imageId === cards.currentOriginSizeImage.id) {
       handlePopupOpen();
     } else {
-      setCurrentOriginSizeImage({});
+      setOriginSizeImage({});
       return mainApi.getOriginalSizeImage(imageId)
         .then((res) => {
-          setCurrentOriginSizeImage({
+          setOriginSizeImage({
             id: res.id,
             url: res.url
           });
@@ -71,7 +78,7 @@ function App() {
           text: values.comment,
           date: dateParseFromTimestampToString(new Date().getTime())
         };
-        setComments([...comments, answerFromServer]);
+        setComments([...cards.comments, answerFromServer]);
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoadingComment(false));
@@ -80,40 +87,50 @@ function App() {
   React.useEffect(() => {
     setIsLoading(true);
     mainApi.getInitialImages()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() =>
-        setIsLoading(false)
-      )
-  }, []);
+      .then((data) => setCards(data))
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  }, [setCards, setIsLoading]);
 
   return (
     <div className="page">
       <Header/>
       <main className="content">
-        {isLoading ? <Preloader/> :
+        {main.isLoading ? <Preloader/> :
           <PhotoGrid
-            cards={cards}
-            isLoading={isLoading}
+            cards={cards.cards}
             onImageClick={handleGetOriginalSizeImage}
           />
         }
       </main>
       <Footer/>
       <Popup
-        isOpenPopup={isOpenPopup}
+        isOpenPopup={main.isOpenPopup}
         onClose={closePopup}
-        isLoadingComment={isLoadingComment}
+        isLoadingComment={main.isLoadingComment}
         onSubmitComment={handleSubmitComment}
-        comments={comments}
-        currentOriginSizeImage={currentOriginSizeImage}
+        comments={cards.comments}
+        currentOriginSizeImage={cards.currentOriginSizeImage}
       />
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (store) => ({
+  main: store.main,
+  cards: store.cards,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setIsOpenPopup: (isOpenBool) => dispatch(setIsOpenPopup(isOpenBool)),
+  setIsLoading: (isLoadingBool) => dispatch(setIsLoading(isLoadingBool)),
+  setIsLoadingComment: (isLoadingBool) => dispatch(setIsLoadingComment(isLoadingBool)),
+  setCards: (cardsArr) => dispatch(setCards(cardsArr)),
+  setOriginSizeImage: (imgObj) => dispatch(setOriginSizeImage(imgObj)),
+  setComments: (commentsArr) => dispatch(setComments(commentsArr))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

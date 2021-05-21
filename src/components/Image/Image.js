@@ -35,13 +35,5 @@ Image.propTypes = {
   onImageClick: PropTypes.func.isRequired
 };
 
-Image.defaultProps = {
-  onClick: () => {
-  },
-  onKeyDown: () => {
-  },
-  id: "",
-  url: ""
-};
 
 export default Image;

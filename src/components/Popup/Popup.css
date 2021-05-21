@@ -34,7 +34,6 @@
   grid-template-rows: 1fr 1fr;
   grid-template-areas: "img comments-container" "form comments-container";
   position: relative;
-  transition: all ease .5s;
   justify-items: center;
   grid-column-gap: 14px;
 }
@@ -150,7 +149,7 @@
   border: none;
   cursor: pointer;
   margin-top: 19px;
-  transition: all ease .5s;
+  /*transition: all ease .5s;*/
 }
 
 .popup__form-button:hover {
