@@ -3,7 +3,7 @@ import './PhotoGrid.css';
 import PropTypes from "prop-types";
 import Image from '../../components/Image/Image';
 
-function PhotoGrid({ cards, onImageClick }) {
+const PhotoGrid = React.memo(({ cards, onImageClick }) => {
 
   return (
     <section className="photo-grid">
@@ -17,7 +17,7 @@ function PhotoGrid({ cards, onImageClick }) {
       ))}
     </section>
   );
-}
+});
 
 PhotoGrid.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.object).isRequired,
