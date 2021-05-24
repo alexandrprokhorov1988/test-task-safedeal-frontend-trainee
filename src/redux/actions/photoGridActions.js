@@ -1,6 +1,14 @@
+export const SET_IS_LOADING = 'SET_IS_LOADING';
 export const SET_CARDS = 'SET_CARDS';
 export const SET_CURRENT_ORIGIN_SIZE_IMAGE = 'SET_CURRENT_ORIGIN_SIZE_IMAGE';
 export const SET_COMMENTS = 'SET_COMMENTS';
+
+export function setIsLoading(isLoadingBool) {
+  return {
+    type: SET_IS_LOADING,
+    payload: isLoadingBool,
+  }
+}
 
 export function setCards(cardsArr) {
   return {

@@ -3,46 +3,42 @@ import {connect} from 'react-redux'
 import PhotoGrid from '../../components/PhotoGrid/PhotoGrid';
 import mainApi from "../../utils/mainApi";
 import {dateParseFromTimestampToString} from "../../utils/helpers";
-import {
-  setIsLoading,
-  setOriginImage,
-  setCards,
-} from "../../redux/actions/photoGridActions";
+import {setCards, setComments, setIsLoading, setOriginSizeImage} from "../../redux/actions/photoGridActions";
 import Preloader from '../../components/Preloader/Preloader';
 
 function PhotoGridContainer(
-  { photoGrid,
-    setIsOpenPopup,
+  {
+    photoGrid,
     setIsLoading,
     setCards,
     setOriginSizeImage,
     setComments,
-    onOpen,
-    onImageClick
+    onOpen
   }) {
 
-  // function handleGetOriginalImage(imageId) {
-  //   if (imageId === photoGrid.currentOriginSizeImage.id) {
-  //     onOpen();
-  //   } else {
-  //     return mainApi.getOriginalImage(imageId)
-  //       .then((res) => {
-  //         const newComments = res.comments.map((comment) => ({
-  //           text: comment.text,
-  //           date: dateParseFromTimestampToString(comment.date),
-  //           id: comment.id
-  //         }));
-  //         setOriginImage({
-  //           id: res.id,
-  //           url: res.url,
-  //           comments: newComments
-  //         });
-  //         onOpen();
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  //   return true;
-  // }
+
+  function handleGetOriginalSizeImage(imageId) {
+    if (imageId === photoGrid.currentOriginSizeImage.id) {
+      onOpen();
+    } else {
+      return mainApi.getOriginalSizeImage(imageId)
+        .then((res) => {
+          setOriginSizeImage({
+            id: res.id,
+            url: res.url
+          });
+          const newComments = res.comments.map((comment) => ({
+            text: comment.text,
+            date: dateParseFromTimestampToString(comment.date),
+            id: comment.id
+          }));
+          setComments(newComments);
+          onOpen();
+        })
+        .catch((err) => console.log(err));
+    }
+    return true;
+  }
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -54,12 +50,12 @@ function PhotoGridContainer(
 
   return (
     <>
-    { photoGrid.isLoading ? <Preloader/> :
-      <PhotoGrid
-        cards={photoGrid.cards}
-        onImageClick={onImageClick}
-      />
-}      </>
+      {photoGrid.isLoading ? <Preloader/> :
+        <PhotoGrid
+          cards={photoGrid.cards}
+          onImageClick={handleGetOriginalSizeImage}
+        />
+      } </>
   );
 }
 
@@ -70,7 +66,8 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) => ({
   setIsLoading: (isLoadingBool) => dispatch(setIsLoading(isLoadingBool)),
   setCards: (cardsArr) => dispatch(setCards(cardsArr)),
-  // setOriginImage: (imgObj) => dispatch(setOriginImage(imgObj)),
+  setOriginSizeImage: (imgObj) => dispatch(setOriginSizeImage(imgObj)),
+  setComments: (commentsArr) => dispatch(setComments(commentsArr))
 });
 
 export default connect(

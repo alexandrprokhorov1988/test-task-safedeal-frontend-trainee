@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
 import {mainReducer} from "./main";
-import {cardsReducer} from "./cards";
+import {photoGridReducer} from "./photoGrid";
+import {popupReducer} from "./popup";
 
 export const rootReducer = combineReducers({
   main: mainReducer,
-  cards: cardsReducer,
+  photoGrid: photoGridReducer,
+  popup: popupReducer,
 });
