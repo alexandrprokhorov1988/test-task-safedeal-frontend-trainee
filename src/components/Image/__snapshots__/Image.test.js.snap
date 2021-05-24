@@ -11,27 +11,3 @@ exports[`Image component Image snapshot 1`] = `
   tabIndex={0}
 />
 `;
-
-exports[`Image snapshot 1`] = `
-<img
-  alt="Картинка"
-  className="photo-grid-img"
-  onClick={[Function]}
-  onKeyDown={[Function]}
-  role="presentation"
-  src="#"
-  tabIndex={0}
-/>
-`;
-
-exports[`Рендер footer с текстом jestio 1`] = `
-<img
-  alt="Картинка"
-  className="photo-grid-img"
-  onClick={[Function]}
-  onKeyDown={[Function]}
-  role="presentation"
-  src="#"
-  tabIndex={0}
-/>
-`;

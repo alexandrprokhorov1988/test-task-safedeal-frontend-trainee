@@ -16,7 +16,6 @@ function PhotoGridContainer(
     onOpen
   }) {
 
-
   function handleGetOriginalSizeImage(imageId) {
     if (imageId === photoGrid.currentOriginSizeImage.id) {
       onOpen();

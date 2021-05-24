@@ -4,7 +4,6 @@ import renderer from 'react-test-renderer';
 import {act} from "react-dom/test-utils";
 import Header from './Header';
 
-
 let container = null;
 beforeEach(() => {
   container = document.createElement("div");

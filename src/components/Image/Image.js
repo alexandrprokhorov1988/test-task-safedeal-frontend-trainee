@@ -35,5 +35,4 @@ Image.propTypes = {
   onImageClick: PropTypes.func.isRequired
 };
 
-
 export default Image;

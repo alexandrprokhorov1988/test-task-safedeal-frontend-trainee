@@ -27,6 +27,7 @@
     "jsx-a11y/no-noninteractive-tabindex": 0,
     "no-shadow": 0,
     "react/prop-types": 0,
-    "no-noninteractive-element-to-interactive-role": 0
+    "no-noninteractive-element-to-interactive-role": 0,
+    "arrow-body-style": 0
   }
 }

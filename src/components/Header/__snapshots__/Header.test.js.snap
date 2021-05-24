@@ -11,27 +11,3 @@ exports[`Header component Рендер Header snapshot 1`] = `
   </h1>
 </footer>
 `;
-
-exports[`Рендер Header snapshot 1`] = `
-<footer
-  className="header"
->
-  <h1
-    className="header__title"
-  >
-    Test APP
-  </h1>
-</footer>
-`;
-
-exports[`Рендер footer с текстом jestio 1`] = `
-<footer
-  className="header"
->
-  <h1
-    className="header__title"
-  >
-    Test APP
-  </h1>
-</footer>
-`;

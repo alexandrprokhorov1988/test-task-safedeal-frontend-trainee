@@ -19,6 +19,7 @@ exports[`App snapshot 1`] = `
     <section
       className="photo-grid"
     />
+     
   </main>
   <footer
     className="footer"

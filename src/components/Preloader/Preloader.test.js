@@ -1,7 +1,8 @@
 import React from 'react';
-import {unmountComponentAtNode} from "react-dom";
+import {render, unmountComponentAtNode} from "react-dom";
 import renderer from 'react-test-renderer';
 import Preloader from './Preloader';
+import {act} from "react-dom/test-utils";
 
 let container = null;
 beforeEach(() => {
@@ -15,9 +16,18 @@ afterEach(() => {
   container = null;
 });
 
-it('Preloader component', () => {
-  const render = renderer
-    .create(<Preloader/>)
-    .toJSON();
-  expect(render).toMatchSnapshot();
+describe('Preloader component', () => {
+  it("Рендер Preloader с текстом", () => {
+    act(() => {
+      render(<Preloader/>, container);
+    });
+    expect(container.textContent).toBe("Идет поиск фотографий...");
+  });
+
+  it('Preloader component', () => {
+    const render = renderer
+      .create(<Preloader/>)
+      .toJSON();
+    expect(render).toMatchSnapshot();
+  });
 });

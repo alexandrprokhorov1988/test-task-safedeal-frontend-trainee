@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Рендер footer с текстом jestio 1`] = `
+exports[`Footer component Рендер footer snapshot 1`] = `
 <footer
   className="footer"
 >

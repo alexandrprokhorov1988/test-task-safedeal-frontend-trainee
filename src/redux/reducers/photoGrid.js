@@ -1,4 +1,4 @@
-import {SET_CARDS,SET_IS_LOADING , SET_CURRENT_ORIGIN_SIZE_IMAGE, SET_COMMENTS} from "../actions/photoGridActions";
+import {SET_CARDS, SET_COMMENTS, SET_CURRENT_ORIGIN_SIZE_IMAGE, SET_IS_LOADING} from "../actions/photoGridActions";
 
 export const initialState = {
   cards: [],

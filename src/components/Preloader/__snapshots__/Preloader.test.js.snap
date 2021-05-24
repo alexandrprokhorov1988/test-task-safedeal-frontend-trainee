@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Рендер компонента Preloader 1`] = `
+exports[`Preloader component Preloader component 1`] = `
 <div
   className="preloader"
 >

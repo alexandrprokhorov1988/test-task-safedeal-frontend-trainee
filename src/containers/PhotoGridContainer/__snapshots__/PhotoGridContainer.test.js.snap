@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PhotoGridContainer container PhotoGridContainer container 1`] = `
+Array [
+  <section
+    className="photo-grid"
+  />,
+  " ",
+]
+`;

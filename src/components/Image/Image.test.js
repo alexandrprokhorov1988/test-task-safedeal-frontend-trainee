@@ -3,7 +3,6 @@ import {render, unmountComponentAtNode} from "react-dom";
 import renderer from 'react-test-renderer';
 import {act} from "react-dom/test-utils";
 import Image from './Image';
-import handleGetOriginalSizeImage from '../../components/App/App';
 
 let container = null;
 beforeEach(() => {
@@ -44,7 +43,7 @@ describe('Image component', () => {
 
   it('Image snapshot', () => {
     const result = renderer
-      .create(<Image id={237} url="#" onImageClick={handleGetOriginalSizeImage}/>)
+      .create(<Image id={237} url="#" onImageClick={()=>{}}/>)
       .toJSON();
     expect(result).toMatchSnapshot();
   });

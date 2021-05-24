@@ -1,9 +1,8 @@
 import React from 'react';
-import { render, unmountComponentAtNode } from "react-dom";
+import {render, unmountComponentAtNode} from "react-dom";
 import renderer from 'react-test-renderer';
-import { act } from "react-dom/test-utils";
+import {act} from "react-dom/test-utils";
 import Footer from './Footer';
-
 
 let container = null;
 beforeEach(() => {
@@ -17,18 +16,18 @@ afterEach(() => {
   container = null;
 });
 
-
-it("Рендер footer с текстом rureactjs", () => {
-  act(() => {
-    render(<Footer />, container);
+describe('Footer component', () => {
+  it("Рендер footer с текстом", () => {
+    act(() => {
+      render(<Footer/>, container);
+    });
+    expect(container.textContent).toBe("© 2018-2019-2021");
   });
-  expect(container.textContent).toBe("© 2018-2019-2021");
-});
 
-
-it('Рендер footer с текстом jestio', () => {
-  const tree = renderer
-    .create(<Footer/>)
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+  it('Рендер footer snapshot', () => {
+    const tree = renderer
+      .create(<Footer/>)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
