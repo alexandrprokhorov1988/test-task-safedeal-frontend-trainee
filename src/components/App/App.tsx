@@ -25,11 +25,8 @@ const App = () => {
     document.body.style.overflow = "auto";
   }
 
-  function handleEscClose(event: Event):void {
-    // (event.target as HTMLInputElement).value
-    // if (event.key === 'Escape') {
-    console.log(event);
-      if ((event.target as HTMLInputElement).value === 'Escape') {
+  function handleEscClose(event:any):void {
+      if (event.key === 'Escape') {
       closePopup();
     }
   }
