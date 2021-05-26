@@ -1,14 +1,19 @@
 import React from 'react';
 import './Image.css';
-import PropTypes from "prop-types";
 
-const Image = React.memo(({ id, url, onImageClick }) => {
+interface IImage {
+  id: number,
+  url: string,
+  onImageClick: (id: number) => void
+}
+
+const Image: React.FC<IImage> = ({id, url, onImageClick}) => {
 
   function handleImageClick() {
     onImageClick(id);
   }
 
-  function handleKeyDown(e) {
+  function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'Enter') {
       onImageClick(id);
     }
@@ -27,12 +32,6 @@ const Image = React.memo(({ id, url, onImageClick }) => {
       role="presentation"
     />
   );
-});
-
-Image.propTypes = {
-  id: PropTypes.number.isRequired,
-  url: PropTypes.string.isRequired,
-  onImageClick: PropTypes.func.isRequired
 };
 
-export default Image;
+export default React.memo(Image);

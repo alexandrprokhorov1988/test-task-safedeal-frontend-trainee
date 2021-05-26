@@ -1,9 +1,24 @@
 import React from 'react';
 import './Popup.css';
-import PropTypes from 'prop-types';
 import {useFormValidation} from "../../hooks/useFormValidation";
 
-const Popup = React.memo((
+interface IPopupProps {
+  isOpenPopup: boolean,
+  onClose: () => void,
+  isLoadingComment: boolean,
+  onSubmitComment: (values: { name?: string, comment?: string }, id: number) => void, //TODO ?
+  currentOriginSizeImage: {
+    id?: number,
+    url?: string
+  },
+  comments: {
+    id: number,
+    text: string,
+    date: string
+  }[]
+}
+
+const Popup: React.FC<IPopupProps> = (
   {
     isOpenPopup,
     onClose,
@@ -13,24 +28,24 @@ const Popup = React.memo((
     comments
   }) => {
 
-  const { values, errors, isValid, handleChange, resetForm } = useFormValidation();
-
+  const {values, errors, isValid, handleChange, resetForm} = useFormValidation();
+console.log('popup')
   React.useEffect(() => {
     resetForm();
   }, [comments, resetForm]);
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (values.name === '' || values.comment === '') {
       return;
     }
-    onSubmitComment(values, currentOriginSizeImage.id);
+    onSubmitComment(values, currentOriginSizeImage.id!); //TODO !
   }
 
   return (
-    <div className={`popup ${isOpenPopup && "popup_opened"}`} onClick={onClose} role="button" tabIndex="-1"
+    <div className={`popup ${isOpenPopup && "popup_opened"}`} onClick={onClose} role="button" tabIndex={-1}
          aria-hidden="true">
-      <div className="popup__container" onClick={(e) => e.stopPropagation()} role="complementary" tabIndex="-1"
+      <div className="popup__container" onClick={(e) => e.stopPropagation()} role="complementary" tabIndex={-1}
            aria-hidden="true">
         <button
           className="popup__close-button"
@@ -58,8 +73,8 @@ const Popup = React.memo((
             value={values.name || ''}
             onChange={handleChange}
             required
-            minLength="2"
-            maxLength="200"
+            minLength={2}
+            maxLength={200}
             pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s\-]+$"
           />
           <span
@@ -73,8 +88,8 @@ const Popup = React.memo((
             value={values.comment || ''}
             onChange={handleChange}
             required
-            minLength="2"
-            maxLength="200"
+            minLength={2}
+            maxLength={200}
             pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s\-]+$"
           />
           <button
@@ -87,18 +102,7 @@ const Popup = React.memo((
       </div>
     </div>
   );
-});
-
-Popup.propTypes = {
-  isOpenPopup: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  isLoadingComment: PropTypes.bool.isRequired,
-  onSubmitComment: PropTypes.func.isRequired,
-  currentOriginSizeImage: PropTypes.shape({
-    id: PropTypes.number,
-    url: PropTypes.string
-  }).isRequired,
-  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default Popup;
+export default React.memo(Popup);
+

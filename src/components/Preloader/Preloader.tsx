@@ -1,7 +1,7 @@
 import React from 'react';
 import './Preloader.css';
 
-function Preloader() {
+const Preloader = () => {
 
   return (
     <div className="preloader">
@@ -9,6 +9,6 @@ function Preloader() {
       <p className="preloader__text">Идет поиск фотографий...</p>
     </div>
   );
-}
+};
 
 export default Preloader;

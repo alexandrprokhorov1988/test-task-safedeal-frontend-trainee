@@ -8,3 +8,5 @@ export const rootReducer = combineReducers({
   photoGrid: photoGridReducer,
   popup: popupReducer,
 });
+
+export type RootState = ReturnType<typeof rootReducer>;

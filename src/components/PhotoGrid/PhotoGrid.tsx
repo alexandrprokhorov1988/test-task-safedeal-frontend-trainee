@@ -1,13 +1,20 @@
 import React from 'react';
 import './PhotoGrid.css';
-import PropTypes from "prop-types";
 import Image from '../../components/Image/Image';
 
-const PhotoGrid = React.memo(({ cards, onImageClick }) => {
+interface IPhotoGridProps {
+  cards: {
+    id: number,
+    url: string,
+  }[],
+  onImageClick: (id:number) => void,
+}
 
+const PhotoGrid: React.FC<IPhotoGridProps> = ({cards, onImageClick}) => {
+console.log('photogrid')
   return (
     <section className="photo-grid">
-      {cards.map((card) => (
+      {cards && cards.map((card) => (
         <Image
           key={card.id}
           id={card.id}
@@ -17,11 +24,6 @@ const PhotoGrid = React.memo(({ cards, onImageClick }) => {
       ))}
     </section>
   );
-});
-
-PhotoGrid.propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onImageClick: PropTypes.func.isRequired,
 };
 
-export default PhotoGrid;
+export default React.memo(PhotoGrid);

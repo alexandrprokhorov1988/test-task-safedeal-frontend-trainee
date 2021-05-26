@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.css';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import {setIsOpenPopup} from "../../redux/actions/mainActions";
+// import {setIsOpenPopup} from "../../redux/actions/mainActions";
 import PhotoGridContainer from '../../containers/PhotoGridContainer/PhotoGridContainer';
 import PopupContainer from '../../containers/PopupContainer/PopupContainer';
+import {useAppSelector} from "../../hooks/useAppSelector";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
 
-function App(
-  {
-    main,
-    setIsOpenPopup
-  }) {
+const App = () => {
+
+  const {setIsOpenPopup} = useAppDispatch();
 
   function handlePopupOpen() {
     setIsOpenPopup(true);
@@ -25,8 +25,11 @@ function App(
     document.body.style.overflow = "auto";
   }
 
-  function handleEscClose(e) {
-    if (e.key === 'Escape') {
+  function handleEscClose(event: Event):void {
+    // (event.target as HTMLInputElement).value
+    // if (event.key === 'Escape') {
+    console.log(event);
+      if ((event.target as HTMLInputElement).value === 'Escape') {
       closePopup();
     }
   }
@@ -45,13 +48,15 @@ function App(
       />
     </div>
   );
-}
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  setIsOpenPopup: (isOpenBool) => dispatch(setIsOpenPopup(isOpenBool)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   setIsOpenPopup: (isOpenBool) => dispatch(setIsOpenPopup(isOpenBool)),
+// });
+//
+// export default connect(
+//   null,
+//   mapDispatchToProps
+// )(App);
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(App);
+export default App;

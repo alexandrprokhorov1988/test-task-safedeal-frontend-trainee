@@ -6,14 +6,20 @@
   "homepage": "./",
   "author": "Alexandr Prokhorov",
   "dependencies": {
+    "@testing-library/react": "^11.2.7",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.6.1",
+    "@types/react": "^17.0.6",
+    "@types/react-dom": "^17.0.5",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-scripts": "4.0.3",
     "redux": "^4.1.0",
+    "typescript": "^4.2.4",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -44,7 +50,6 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/react": "^11.2.7",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint-config-airbnb": "^18.2.1",
