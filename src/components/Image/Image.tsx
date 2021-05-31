@@ -2,18 +2,18 @@ import React from 'react';
 import './Image.css';
 
 interface IImage {
-  id: number,
-  url: string,
-  onImageClick: (id: number) => void
+  id: number;
+  url: string;
+  onImageClick: (id: number) => void;
 }
 
 const Image: React.FC<IImage> = ({id, url, onImageClick}) => {
 
-  function handleImageClick() {
+  function handleImageClick(): void {
     onImageClick(id);
   }
 
-  function handleKeyDown(e: React.KeyboardEvent) {
+  function handleKeyDown(e: React.KeyboardEvent): void | boolean {
     if (e.key === 'Enter') {
       onImageClick(id);
     }

@@ -18,7 +18,7 @@ export const useFormValidation = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({...values, [e.target.name]: e.target.value});
     setErrors({...errors, [e.target.name]: e.target.validationMessage});
-    setIsValid(e.target.closest("form")!.checkValidity());  //TODO попробовать другие варианты
+    setIsValid(e.target.closest("form")!.checkValidity());
   };
 
   const resetForm = useCallback((newValues = {}, newErrors = {}, newIsValid = false) => {

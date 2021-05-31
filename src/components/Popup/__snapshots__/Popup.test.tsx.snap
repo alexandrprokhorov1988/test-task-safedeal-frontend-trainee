@@ -3,17 +3,17 @@
 exports[`Popup component Popup snapshot 1`] = `
 <div
   aria-hidden="true"
-  className="popup popup_opened"
+  className="popup "
   onClick={[Function]}
   role="button"
-  tabIndex="-1"
+  tabIndex={-1}
 >
   <div
     aria-hidden="true"
     className="popup__container"
     onClick={[Function]}
     role="complementary"
-    tabIndex="-1"
+    tabIndex={-1}
   >
     <button
       className="popup__close-button"
@@ -23,26 +23,10 @@ exports[`Popup component Popup snapshot 1`] = `
     <img
       alt="Картинка"
       className="popup__img"
-      src="https://picsum.photos/id/237/600/400"
     />
     <div
       className="popup__comments-container"
-    >
-      <div
-        className="popup__comment-container"
-      >
-        <p
-          className="popup__comment popup__comment_type_date"
-        >
-          03.01.2020
-        </p>
-        <p
-          className="popup__comment"
-        >
-          Крутая фотка
-        </p>
-      </div>
-    </div>
+    />
     <form
       action="#"
       className="popup__form"
@@ -57,8 +41,8 @@ exports[`Popup component Popup snapshot 1`] = `
       </span>
       <input
         className="popup__form-input"
-        maxLength="200"
-        minLength="2"
+        maxLength={200}
+        minLength={2}
         name="name"
         onChange={[Function]}
         pattern="^[а-яёА-ЯЁa-zA-Z0-9-\\\\s\\\\-]+$"
@@ -74,8 +58,8 @@ exports[`Popup component Popup snapshot 1`] = `
       </span>
       <input
         className="popup__form-input"
-        maxLength="200"
-        minLength="2"
+        maxLength={200}
+        minLength={2}
         name="comment"
         onChange={[Function]}
         pattern="^[а-яёА-ЯЁa-zA-Z0-9-\\\\s\\\\-]+$"

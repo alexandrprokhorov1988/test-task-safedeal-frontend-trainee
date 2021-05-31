@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import {act} from "react-dom/test-utils";
 import Header from './Header';
 
-let container = null;
+let container:any = null;
 beforeEach(() => {
   container = document.createElement("div");
   document.body.appendChild(container);

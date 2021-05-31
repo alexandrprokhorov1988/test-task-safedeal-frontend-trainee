@@ -1,49 +1,58 @@
 import React from 'react';
 import './Popup.css';
 import {useFormValidation} from "../../hooks/useFormValidation";
+import mainApi from "../../utils/mainApi";
+import {dateParseFromTimestampToString} from "../../utils/helpers";
+import {useAppSelector} from "../../hooks/useAppSelector";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
 
 interface IPopupProps {
-  isOpenPopup: boolean,
-  onClose: () => void,
-  isLoadingComment: boolean,
-  onSubmitComment: (values: { name?: string, comment?: string }, id: number) => void, //TODO ?
-  currentOriginSizeImage: {
-    id?: number,
-    url?: string
-  },
-  comments: {
-    id: number,
-    text: string,
-    date: string
-  }[]
+  onClose: () => void;
 }
 
-const Popup: React.FC<IPopupProps> = (
-  {
-    isOpenPopup,
-    onClose,
-    isLoadingComment,
-    onSubmitComment,
-    currentOriginSizeImage,
-    comments
-  }) => {
+const Popup: React.FC<IPopupProps> = ({onClose}) => {
 
   const {values, errors, isValid, handleChange, resetForm} = useFormValidation();
-console.log('popup')
+  const main = useAppSelector(state => state.main);
+  const popup = useAppSelector(state => state.popup);
+  const photoGrid = useAppSelector(state => state.photoGrid);
+  const {setIsLoadingComment, setComments} = useAppDispatch();
+
+  console.log('popup');  //todo del
+
   React.useEffect(() => {
     resetForm();
-  }, [comments, resetForm]);
+  }, [photoGrid.comments, resetForm]);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmitComment(values: { name?: string, comment?: string }, id: number) {
+    setIsLoadingComment(true);
+    return mainApi.setNewComment({
+      id: id,
+      name: values.name,
+      comment: values.comment
+    })
+      .then(() => {
+        const answerFromServer = {
+          id: Math.random(),
+          text: values.comment,
+          date: dateParseFromTimestampToString(new Date().getTime())
+        };
+        setComments([...photoGrid.comments, answerFromServer]);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoadingComment(false));
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     if (values.name === '' || values.comment === '') {
       return;
     }
-    onSubmitComment(values, currentOriginSizeImage.id!); //TODO !
+    handleSubmitComment(values, photoGrid.currentOriginSizeImage.id!);
   }
 
   return (
-    <div className={`popup ${isOpenPopup && "popup_opened"}`} onClick={onClose} role="button" tabIndex={-1}
+    <div className={`popup ${main.isOpenPopup ? "popup_opened" : ""}`} onClick={onClose} role="button" tabIndex={-1}
          aria-hidden="true">
       <div className="popup__container" onClick={(e) => e.stopPropagation()} role="complementary" tabIndex={-1}
            aria-hidden="true">
@@ -52,9 +61,9 @@ console.log('popup')
           type="button"
           onClick={onClose}
         />
-        <img className="popup__img" src={currentOriginSizeImage.url} alt="Картинка"/>
+        <img className="popup__img" src={photoGrid.currentOriginSizeImage.url} alt="Картинка"/>
         <div className="popup__comments-container">
-          {comments.map((comment) => (
+          {photoGrid.comments.map((comment) => (
             <div key={comment.id} className="popup__comment-container">
               <p className="popup__comment popup__comment_type_date">{comment.date}</p>
               <p className="popup__comment">{comment.text}</p>
@@ -95,8 +104,8 @@ console.log('popup')
           <button
             className="popup__form-button"
             type="submit"
-            disabled={isLoadingComment || !isValid}
-          >{`${isLoadingComment ? 'Добавление комментария' : 'Оставить комментарий'}`}
+            disabled={popup.isLoadingComment || !isValid}
+          >{`${popup.isLoadingComment ? 'Добавление комментария' : 'Оставить комментарий'}`}
           </button>
         </form>
       </div>

@@ -7,16 +7,16 @@ import {
 } from "../actions/photoGridActions";
 
 interface IPhotoGridState {
-  cards: any[],
-  isLoading: boolean,
+  cards: any[];
+  isLoading: boolean;
   currentOriginSizeImage: {
     id?: number,
     url?: string
-  },
-  comments: any[],
+  };
+  comments: any[];
 }
 
-const initialState: IPhotoGridState = {
+export const initialState: IPhotoGridState = {
   cards: [],
   isLoading: false,
   currentOriginSizeImage: {},

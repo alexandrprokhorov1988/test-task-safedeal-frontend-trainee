@@ -1,15 +1,16 @@
-import {SET_IS_LOADING_COMMENT} from "../../redux/actions/popupActions";
-import {initialState, popupReducer} from "../../redux/reducers/popup";
+import {setIsLoadingComment} from "../actions/popupActions";
+import {initialState, popupReducer} from "./popup";
 
 describe("popup reducer", () => {
   it("SET_IS_LOADING_COMMENT is success", () => {
-    const action = {
-      type: SET_IS_LOADING_COMMENT,
-      payload: true
-    };
-    expect(popupReducer(initialState, action)).toEqual({
+    expect(popupReducer(initialState, setIsLoadingComment(true))).toEqual({
       ...initialState,
-      isLoadingComment: action.payload
-    })
+      isLoadingComment: true
+    });
+
+    expect(popupReducer(initialState, setIsLoadingComment(false))).toEqual({
+      ...initialState,
+      isLoadingComment: false
+    });
   });
 });

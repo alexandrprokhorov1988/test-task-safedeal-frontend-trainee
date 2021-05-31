@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import {act} from "react-dom/test-utils";
 import Image from './Image';
 
-let container = null;
+let container: any = null;
 beforeEach(() => {
   container = document.createElement("div");
   document.body.appendChild(container);
@@ -17,6 +17,14 @@ afterEach(() => {
 });
 
 describe('Image component', () => {
+  it('Должна находить className photo-grid-img', () => {
+    const onChange = jest.fn();
+    act(() => {
+      render(<Image id={237} url="#" onImageClick={onChange}/>, container);
+    });
+    expect(container.firstChild).toHaveClass("photo-grid-img");
+  });
+
   it('Должна вызывать коллбэк функцию по click', () => {
     const onChange = jest.fn();
     act(() => {
@@ -24,7 +32,7 @@ describe('Image component', () => {
     });
     const image = document.querySelector(".photo-grid-img");
     act(() => {
-      image.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      image?.dispatchEvent(new MouseEvent("click", {bubbles: true}));
     });
     expect(onChange).toHaveBeenCalledTimes(1);
   });
@@ -36,14 +44,15 @@ describe('Image component', () => {
     });
     const image = document.querySelector(".photo-grid-img");
     act(() => {
-      image.dispatchEvent(new KeyboardEvent("keydown", { bubbles: true, key: 'Enter' }));
+      image?.dispatchEvent(new KeyboardEvent("keydown", {bubbles: true, key: 'Enter'}));
     });
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 
   it('Image snapshot', () => {
     const result = renderer
-      .create(<Image id={237} url="#" onImageClick={()=>{}}/>)
+      .create(<Image id={237} url="#" onImageClick={() => {
+      }}/>)
       .toJSON();
     expect(result).toMatchSnapshot();
   });

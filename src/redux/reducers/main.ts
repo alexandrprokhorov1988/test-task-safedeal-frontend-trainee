@@ -1,7 +1,7 @@
 import {mainActions, SET_IS_OPEN_POPUP} from "../actions/mainActions";
 
 interface IMainState {
-  isOpenPopup: boolean,
+  isOpenPopup: boolean;
 }
 
 export const initialState: IMainState = {

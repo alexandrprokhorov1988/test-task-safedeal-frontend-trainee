@@ -1,4 +1,4 @@
-import {SET_IS_LOADING_COMMENT, setIsLoadingComment} from '../../redux/actions/popupActions';
+import {SET_IS_LOADING_COMMENT, setIsLoadingComment} from './popupActions';
 
 describe("popupAction action", () => {
   it("setIsLoadingComment() should be create an action to set isLoadingComment", () => {

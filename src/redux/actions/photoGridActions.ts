@@ -4,23 +4,23 @@ export const SET_CURRENT_ORIGIN_SIZE_IMAGE = 'SET_CURRENT_ORIGIN_SIZE_IMAGE';
 export const SET_COMMENTS = 'SET_COMMENTS';
 
 interface ISetCardsAction {
-  type: typeof SET_CARDS,
-  payload: any[]
+  type: typeof SET_CARDS;
+  payload: any[];
 }
 
 interface ISetCommentsAction {
-  type: typeof SET_COMMENTS,
-  payload: any[]
+  type: typeof SET_COMMENTS;
+  payload: any[];
 }
 
 interface ISetCurrentOriginSizeImageAction {
-  type: typeof SET_CURRENT_ORIGIN_SIZE_IMAGE,
-  payload: object
+  type: typeof SET_CURRENT_ORIGIN_SIZE_IMAGE;
+  payload: object;
 }
 
 interface ISetIsLoadingAction {
-  type: typeof SET_IS_LOADING,
-  payload: boolean
+  type: typeof SET_IS_LOADING;
+  payload: boolean;
 }
 
 export type photoGridActions =
@@ -29,28 +29,28 @@ export type photoGridActions =
   | ISetCurrentOriginSizeImageAction
   | ISetIsLoadingAction;
 
-export function setIsLoading(isLoadingBool: boolean) {
+export function setIsLoading(isLoadingBool: boolean): ISetIsLoadingAction {
   return {
     type: SET_IS_LOADING,
     payload: isLoadingBool,
   }
 }
 
-export function setCards(cardsArr: any[]) {
+export function setCards(cardsArr: any[]): ISetCardsAction {
   return {
     type: SET_CARDS,
     payload: cardsArr,
   }
 }
 
-export function setOriginSizeImage(image: {}) {
+export function setOriginSizeImage(image: {}): ISetCurrentOriginSizeImageAction {
   return {
     type: SET_CURRENT_ORIGIN_SIZE_IMAGE,
     payload: image,
   }
 }
 
-export function setComments(commentsArr: any[]) {
+export function setComments(commentsArr: any[]): ISetCommentsAction {
   return {
     type: SET_COMMENTS,
     payload: commentsArr,

@@ -1,7 +1,7 @@
 import {popupActions, SET_IS_LOADING_COMMENT} from "../actions/popupActions";
 
 interface IPopupReducer {
-  isLoadingComment: boolean,
+  isLoadingComment: boolean;
 }
 
 export const initialState: IPopupReducer = {

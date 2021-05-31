@@ -6,7 +6,6 @@
   "homepage": "./",
   "author": "Alexandr Prokhorov",
   "dependencies": {
-    "@testing-library/react": "^11.2.7",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/user-event": "^12.8.3",
     "@types/jest": "^26.0.23",
@@ -50,6 +49,8 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react": "^11.2.7",
+    "@types/react-test-renderer": "^17.0.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint-config-airbnb": "^18.2.1",

@@ -7,7 +7,7 @@ import {
   setComments,
   setIsLoading,
   setOriginSizeImage
-} from '../../redux/actions/photoGridActions';
+} from './photoGridActions';
 
 describe("photoGridAction action", () => {
   it("setIsLoading() should be create an action to set isLoading", () => {

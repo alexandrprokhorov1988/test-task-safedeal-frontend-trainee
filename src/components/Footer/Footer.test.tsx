@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import {act} from "react-dom/test-utils";
 import Footer from './Footer';
 
-let container = null;
+let container:any = null;
 beforeEach(() => {
   container = document.createElement("div");
   document.body.appendChild(container);

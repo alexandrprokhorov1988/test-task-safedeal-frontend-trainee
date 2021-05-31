@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import Preloader from './Preloader';
 import {act} from "react-dom/test-utils";
 
-let container = null;
+let container:any = null;
 beforeEach(() => {
   container = document.createElement("div");
   document.body.appendChild(container);
