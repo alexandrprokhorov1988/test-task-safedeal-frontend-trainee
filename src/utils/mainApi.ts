@@ -1,12 +1,33 @@
 import {BASE_URL} from "./config";
 
+interface IMainApi {
+  baseUrl: string;
+  headers: {
+    'Accept'?: string,
+    'Content-Type'?: string,
+  };
+}
+
+interface ISetNewComment {
+  id: number;
+  name: string;
+  comment: string;
+}
+
 class MainApi {
-  constructor({ baseUrl, headers }) {
+  private readonly _baseurl: string;
+
+  private readonly _headers: {
+    'Accept'?: string,
+    'Content-Type'?: string,
+  };
+
+  constructor({baseUrl, headers}: IMainApi) {
     this._baseurl = baseUrl;
     this._headers = headers;
   }
 
-  getInitialImages() {
+  public getInitialImages() {
     return fetch(`${this._baseurl}`, {
       headers: this._headers
     })
@@ -18,7 +39,7 @@ class MainApi {
       });
   }
 
-  getOriginalSizeImage(id) {
+  public getOriginalSizeImage(id: number) {
     return fetch(`${this._baseurl}/${id}`, {
       headers: this._headers,
     })
@@ -30,11 +51,11 @@ class MainApi {
       });
   }
 
-  setNewComment({ id, name, comment }) {
+  public setNewComment({id, name, comment}: ISetNewComment) {
     return fetch(`${this._baseurl}/${id}/comments`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({ name, comment })
+      body: JSON.stringify({name, comment})
     })
       .then((res) => {
         if (res.ok) {

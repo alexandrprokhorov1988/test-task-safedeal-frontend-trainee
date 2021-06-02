@@ -24,12 +24,12 @@ const Popup: React.FC<IPopupProps> = ({onClose}) => {
     resetForm();
   }, [photoGrid.comments, resetForm]);
 
-  function handleSubmitComment(values: { name?: string, comment?: string }, id: number) {
+  function handleSubmitComment( name: string, comment: string , id: number) {
     setIsLoadingComment(true);
     return mainApi.setNewComment({
       id: id,
-      name: values.name,
-      comment: values.comment
+      name: name,
+      comment: comment
     })
       .then(() => {
         const answerFromServer = {
@@ -48,7 +48,7 @@ const Popup: React.FC<IPopupProps> = ({onClose}) => {
     if (values.name === '' || values.comment === '') {
       return;
     }
-    handleSubmitComment(values, photoGrid.currentOriginSizeImage.id!);
+    handleSubmitComment(values.name!, values.comment!, photoGrid.currentOriginSizeImage.id!);
   }
 
   return (

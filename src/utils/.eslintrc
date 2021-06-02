@@ -4,7 +4,9 @@
     "airbnb",
     "plugin:jsx-a11y/recommended",
     "prettier",
-    "airbnb/hooks"
+    "airbnb/hooks",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended"
   ],
   "plugins": [
     "jsx-a11y",
@@ -26,10 +28,22 @@
     ],
     "import/no-useless-path-segments": 0,
     "no-use-before-define": ["error", { "functions": false }],
+    "@typescript-eslint/no-use-before-define": 0,
     "jsx-a11y/no-noninteractive-tabindex": 0,
     "no-shadow": 0,
     "react/prop-types": 0,
     "no-noninteractive-element-to-interactive-role": 0,
-    "arrow-body-style": 0
+    "arrow-body-style": 0,
+    "@typescript-eslint/rule-name": 0,
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
   }
 }

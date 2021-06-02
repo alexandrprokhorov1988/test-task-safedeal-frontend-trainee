@@ -22,6 +22,7 @@ const PhotoGrid: React.FC<IPhotoGridProps> = ({onOpen}) => {
     if (imageId === photoGrid.currentOriginSizeImage.id) {
       onOpen();
     } else {
+      setOriginSizeImage({});
       return mainApi.getOriginalSizeImage(imageId)
         .then((res) => {
           setOriginSizeImage({
@@ -42,7 +43,7 @@ const PhotoGrid: React.FC<IPhotoGridProps> = ({onOpen}) => {
   }
 
   React.useEffect(() => {
-    console.log('запрос на сервер за карточками')
+    console.log('запрос на сервер за карточками') //todo del
     setIsLoading(true);
     mainApi.getInitialImages()
       .then((data) => setCards(data))

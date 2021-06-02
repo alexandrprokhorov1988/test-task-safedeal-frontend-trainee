@@ -3,23 +3,10 @@ import {render, unmountComponentAtNode} from "react-dom";
 import renderer from 'react-test-renderer';
 import {act} from "react-dom/test-utils";
 import PhotoGrid from './PhotoGrid';
-import {createStore} from "redux";
+import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
-import {initialState, photoGridReducer} from "../../redux/reducers/photoGrid";
 
 let container: any = null;
-const fakeCards = [
-  {
-    id: 237,
-    url: "https://picsum.photos/id/237/300/200",
-  }
-];
-const renderWhithEedux = (component:any, {initialStore, store = createStore(photoGridReducer, initialState)}) => {
-  return {
-    ...renderer.create(<Provider store={store}>{component}</Provider>), store,
-  }
-};
-
 
 beforeEach(() => {
   container = document.createElement("div");
@@ -33,22 +20,32 @@ afterEach(() => {
 });
 
 describe('PhotoGrid component', () => {
-  it("Должен отрисовывать картинки c заданными аттрибутами", async () => {
-    act(() => {
-      render(<PhotoGrid onOpen={() => {
-      }}/>, container);
-    });
-    const img = container.querySelector(".photo-grid-img");
-    expect(img.getAttribute("src")).toEqual("https://picsum.photos/id/237/300/200");
-    expect(img.getAttribute("alt")).toEqual("Картинка");
-    expect(img.getAttribute("role")).toEqual("presentation");
-    expect(img.getAttribute("tabIndex")).toEqual("0");
-  });
-
   it('PhotoGrid snapshot', () => {
+    const store = createStore(combineReducers({
+      main: () => ({
+        isOpenPopup: false,
+      }),
+      photoGrid: () => ({
+        cards: [{
+          id: 1,
+          url: "#/testUrl_1",
+        },
+          {
+            id: 2,
+            url: "#/testUrl_2",
+          }],
+        isLoading: false,
+        currentOriginSizeImage: {id: 5, url: '#/testUrl'},
+        comments: [{id: 1, text: 'Тестовый коммент', date: '55.55.2055'}],
+      }),
+      popup: () => ({
+        isLoadingComment: false,
+      }),
+    }));
+
     const result = renderer
-      .create(<PhotoGrid onOpen={() => {
-      }}/>)
+      .create(<Provider store={store}><PhotoGrid onOpen={() => {
+      }}/></Provider>)
       .toJSON();
     expect(result).toMatchSnapshot();
   });
