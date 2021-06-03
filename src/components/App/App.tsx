@@ -2,22 +2,20 @@ import React from 'react';
 import './App.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import {useAppDispatch} from "../../hooks/useAppDispatch";
 import PhotoGrid from '../../components/PhotoGrid/PhotoGrid';
 import Popup from "../Popup/Popup";
+import app from '../../store/app';
 
 const App = () => {
 
-  const {setIsOpenPopup} = useAppDispatch();
-
   function handlePopupOpen(): void {
-    setIsOpenPopup(true);
+    app.setIsOpenPopup(true);
     document.addEventListener('keydown', handleEscClose);
     document.body.style.overflow = "hidden";
   }
 
   function closePopup(): void {
-    setIsOpenPopup(false);
+    app.setIsOpenPopup(false);
     document.removeEventListener('keydown', handleEscClose);
     document.body.style.overflow = "auto";
   }

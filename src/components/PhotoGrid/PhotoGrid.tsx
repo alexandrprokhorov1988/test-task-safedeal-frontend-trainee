@@ -1,31 +1,28 @@
 import React from 'react';
+import {observer} from "mobx-react-lite";
 import './PhotoGrid.css';
 import Image from '../../components/Image/Image';
-import {useAppSelector} from "../../hooks/useAppSelector";
 import mainApi from "../../utils/mainApi";
-import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {dateParseFromTimestampToString} from "../../utils/helpers";
 import Preloader from '../../components/Preloader/Preloader';
+import photoGrid from '../../store/photoGrid';
 
 interface IPhotoGridProps {
   onOpen: () => void;
 }
 
-const PhotoGrid: React.FC<IPhotoGridProps> = ({onOpen}) => {
+const PhotoGrid: React.FC<IPhotoGridProps> = observer(({onOpen}) => {
 
-  console.log('photogrid');//todo del
-
-  const photoGrid = useAppSelector(state => state.photoGrid);
-  const {setIsLoading, setOriginSizeImage, setCards, setComments} = useAppDispatch();
+  console.log('photogrid');// todo del
 
   function handleGetOriginalSizeImage(imageId: number) {
-    if (imageId === photoGrid.currentOriginSizeImage.id) {
+    if (imageId === photoGrid.originSizeImage.id) {
       onOpen();
     } else {
-      setOriginSizeImage({});
+      photoGrid.setOriginSizeImage({});
       return mainApi.getOriginalSizeImage(imageId)
         .then((res) => {
-          setOriginSizeImage({
+          photoGrid.setOriginSizeImage({
             id: res.id,
             url: res.url
           });
@@ -34,7 +31,7 @@ const PhotoGrid: React.FC<IPhotoGridProps> = ({onOpen}) => {
             date: dateParseFromTimestampToString(comment.date),
             id: comment.id
           }));
-          setComments(newComments);
+          photoGrid.setComments(newComments);
           onOpen();
         })
         .catch((err) => console.log(err));
@@ -43,14 +40,13 @@ const PhotoGrid: React.FC<IPhotoGridProps> = ({onOpen}) => {
   }
 
   React.useEffect(() => {
-    console.log('запрос на сервер за карточками') //todo del
-    setIsLoading(true);
+    console.log('запрос на сервер за карточками') // todo del
+    photoGrid.setIsLoading(true);
     mainApi.getInitialImages()
-      .then((data) => setCards(data))
+      .then((data) => photoGrid.setCards(data))
       .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false));
+      .finally(() => photoGrid.setIsLoading(false));
   }, []);
-
 
   return (
     <section className="photo-grid">
@@ -68,6 +64,6 @@ const PhotoGrid: React.FC<IPhotoGridProps> = ({onOpen}) => {
       }
     </section>
   );
-};
+});
 
 export default React.memo(PhotoGrid);

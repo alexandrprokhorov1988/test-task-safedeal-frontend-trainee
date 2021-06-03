@@ -1,46 +1,41 @@
 import React from 'react';
+import {observer} from "mobx-react-lite";
 import './Popup.css';
 import {useFormValidation} from "../../hooks/useFormValidation";
 import mainApi from "../../utils/mainApi";
 import {dateParseFromTimestampToString} from "../../utils/helpers";
-import {useAppSelector} from "../../hooks/useAppSelector";
-import {useAppDispatch} from "../../hooks/useAppDispatch";
+import photoGrid from '../../store/photoGrid';
+import popup from '../../store/popup';
+import app from '../../store/app';
 
 interface IPopupProps {
   onClose: () => void;
 }
 
-const Popup: React.FC<IPopupProps> = ({onClose}) => {
+const Popup: React.FC<IPopupProps> = observer(({onClose}) => {
 
   const {values, errors, isValid, handleChange, resetForm} = useFormValidation();
-  const main = useAppSelector(state => state.main);
-  const popup = useAppSelector(state => state.popup);
-  const photoGrid = useAppSelector(state => state.photoGrid);
-  const {setIsLoadingComment, setComments} = useAppDispatch();
 
-  console.log('popup');  //todo del
+  console.log('popup');  // todo del
 
   React.useEffect(() => {
     resetForm();
-  }, [photoGrid.comments, resetForm]);
+  }, [resetForm]);
 
-  function handleSubmitComment( name: string, comment: string , id: number) {
-    setIsLoadingComment(true);
-    return mainApi.setNewComment({
-      id: id,
-      name: name,
-      comment: comment
-    })
+  function handleSubmitComment(name: string, comment: string, id: number) {
+    popup.setIsLoadingComment(true);
+    return mainApi.setNewComment({id, name, comment})
       .then(() => {
         const answerFromServer = {
           id: Math.random(),
-          text: values.comment,
+          text: values.comment!,
           date: dateParseFromTimestampToString(new Date().getTime())
         };
-        setComments([...photoGrid.comments, answerFromServer]);
+        photoGrid.setComments([...photoGrid.comments, answerFromServer]);
+        resetForm();
       })
       .catch((err) => console.log(err))
-      .finally(() => setIsLoadingComment(false));
+      .finally(() => popup.setIsLoadingComment(false));
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
@@ -48,11 +43,11 @@ const Popup: React.FC<IPopupProps> = ({onClose}) => {
     if (values.name === '' || values.comment === '') {
       return;
     }
-    handleSubmitComment(values.name!, values.comment!, photoGrid.currentOriginSizeImage.id!);
+    handleSubmitComment(values.name!, values.comment!, photoGrid.originSizeImage.id!);
   }
 
   return (
-    <div className={`popup ${main.isOpenPopup ? "popup_opened" : ""}`} onClick={onClose} role="button" tabIndex={-1}
+    <div className={`popup ${app.isOpenPopup ? "popup_opened" : ""}`} onClick={onClose} role="button" tabIndex={-1}
          aria-hidden="true">
       <div className="popup__container" onClick={(e) => e.stopPropagation()} role="complementary" tabIndex={-1}
            aria-hidden="true">
@@ -61,9 +56,9 @@ const Popup: React.FC<IPopupProps> = ({onClose}) => {
           type="button"
           onClick={onClose}
         />
-        <img className="popup__img" src={photoGrid.currentOriginSizeImage.url} alt="Картинка"/>
+        <img className="popup__img" src={photoGrid.originSizeImage.url} alt="Картинка"/>
         <div className="popup__comments-container">
-          {photoGrid.comments.map((comment) => (
+          {photoGrid.comments && photoGrid.comments.map((comment) => (
             <div key={comment.id} className="popup__comment-container">
               <p className="popup__comment popup__comment_type_date">{comment.date}</p>
               <p className="popup__comment">{comment.text}</p>
@@ -111,7 +106,7 @@ const Popup: React.FC<IPopupProps> = ({onClose}) => {
       </div>
     </div>
   );
-};
+});
 
 export default React.memo(Popup);
 
