@@ -2,9 +2,8 @@ import {autorun, set, toJS} from 'mobx';
 
 const dateParseFromTimestampToString = (timestamp: number) => {
   const date = new Date(timestamp);
-  const dayAndMonth = date.toLocaleString('default', {day: 'numeric', month: 'numeric'});
-  const year = date.getFullYear();
-  return `${dayAndMonth}.${year}`;
+  const dayAndMonth = date.toLocaleString(undefined, {day: 'numeric', month: 'numeric', year:'numeric'});
+  return `${dayAndMonth}`;
 };
 
 function autoSave(_this: any, name: string) {

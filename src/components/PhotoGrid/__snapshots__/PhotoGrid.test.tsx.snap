@@ -10,7 +10,7 @@ exports[`PhotoGrid component PhotoGrid snapshot 1`] = `
     onClick={[Function]}
     onKeyDown={[Function]}
     role="presentation"
-    src="#/testUrl_1"
+    src="#/test1"
     tabIndex={0}
   />
   <img
@@ -19,7 +19,7 @@ exports[`PhotoGrid component PhotoGrid snapshot 1`] = `
     onClick={[Function]}
     onKeyDown={[Function]}
     role="presentation"
-    src="#/testUrl_2"
+    src="#/test5"
     tabIndex={0}
   />
 </section>

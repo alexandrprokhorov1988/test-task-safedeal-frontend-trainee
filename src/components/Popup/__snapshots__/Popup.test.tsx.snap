@@ -3,7 +3,7 @@
 exports[`Popup component Popup snapshot 1`] = `
 <div
   aria-hidden="true"
-  className="popup popup_opened"
+  className="popup "
   onClick={[Function]}
   role="button"
   tabIndex={-1}
@@ -23,7 +23,7 @@ exports[`Popup component Popup snapshot 1`] = `
     <img
       alt="Картинка"
       className="popup__img"
-      src="#/testUrl"
+      src="#/test1"
     />
     <div
       className="popup__comments-container"
@@ -34,12 +34,12 @@ exports[`Popup component Popup snapshot 1`] = `
         <p
           className="popup__comment popup__comment_type_date"
         >
-          55.55.2055
+          date1
         </p>
         <p
           className="popup__comment"
         >
-          Тестовый коммент
+          text1
         </p>
       </div>
     </div>
