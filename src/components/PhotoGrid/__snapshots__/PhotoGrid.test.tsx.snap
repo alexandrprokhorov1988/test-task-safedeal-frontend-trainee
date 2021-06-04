@@ -6,7 +6,7 @@ exports[`PhotoGrid component PhotoGrid snapshot 1`] = `
 >
   <img
     alt="Картинка"
-    className="photo-grid-img"
+    className="photo-grid-image"
     onClick={[Function]}
     onKeyDown={[Function]}
     role="presentation"
@@ -15,7 +15,7 @@ exports[`PhotoGrid component PhotoGrid snapshot 1`] = `
   />
   <img
     alt="Картинка"
-    className="photo-grid-img"
+    className="photo-grid-image"
     onClick={[Function]}
     onKeyDown={[Function]}
     role="presentation"

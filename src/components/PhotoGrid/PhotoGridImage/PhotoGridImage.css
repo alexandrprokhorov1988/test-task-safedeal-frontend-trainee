@@ -1,4 +1,4 @@
-.photo-grid-img {
+.photo-grid-image {
   min-width: 229px;
   width: 100%;
   min-height: 142px;
@@ -14,7 +14,7 @@
   transition: all ease .5s;
 }
 
-.photo-grid-img:hover {
+.photo-grid-image:hover {
   opacity: 0.9;
   transform: scale(1.1);
 }

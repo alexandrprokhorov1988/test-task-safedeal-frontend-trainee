@@ -3,8 +3,7 @@ import {render, unmountComponentAtNode} from "react-dom";
 import renderer from 'react-test-renderer';
 import Popup from './Popup';
 import {act} from 'react-dom/test-utils';
-import photoGrid from "../../store/photoGrid";
-import popup from '../../store/popup';
+import popup from '../../stores/popupStore/popup';
 
 let container: any = null;
 beforeEach(() => {
@@ -45,8 +44,8 @@ describe('Popup component', () => {
   });
 
   it('Popup snapshot', () => {
-    photoGrid.setOriginSizeImage({id: 1, url: '#/test1'});
-    photoGrid.setComments([{text: "text1", date: "date1", id: 1}]);
+    popup.setOriginSizeImage({id: 1, url: '#/test1'});
+    popup.setComments([{text: "text1", date: "date1", id: 1}]);
     const result = renderer
       .create(<Popup onClose={() => {
       }}/>).toJSON();

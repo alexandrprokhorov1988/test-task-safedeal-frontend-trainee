@@ -1,14 +1,16 @@
 import React from 'react';
 import './App.css';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
-import PhotoGrid from '../../components/PhotoGrid/PhotoGrid';
-import Popup from "../Popup/Popup";
-import app from '../../store/app';
-import {dateParseFromTimestampToString} from "../../utils/helpers";
+import Header from '../Header';
+import Footer from '../Footer';
+import PhotoGrid from '../PhotoGrid';
+import Popup from "../Popup";
+import app from '../../stores/appStore/app';
 
+/**
+ * App component.
+ */
 const App = () => {
-console.log(dateParseFromTimestampToString(1621278139402));
+
   function handlePopupOpen(): void {
     app.setIsOpenPopup(true);
     document.addEventListener('keydown', handleEscClose);

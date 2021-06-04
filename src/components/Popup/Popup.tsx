@@ -2,17 +2,20 @@ import React from 'react';
 import {observer} from "mobx-react-lite";
 import './Popup.css';
 import {useFormValidation} from "../../hooks/useFormValidation";
-import mainApi from "../../utils/mainApi";
-import {dateParseFromTimestampToString} from "../../utils/helpers";
-import photoGrid from '../../store/photoGrid';
-import popup from '../../store/popup';
-import app from '../../store/app';
+import popup from '../../stores/popupStore/popup';
+import app from '../../stores/appStore/app';
 
-interface IPopupProps {
+type PopupProps = {
+  /**
+   * Popup handleClose.
+   */
   onClose: () => void;
 }
 
-const Popup: React.FC<IPopupProps> = observer(({onClose}) => {
+/**
+ * Popup component.
+ */
+const Popup: React.FC<PopupProps> = observer(({onClose}) => {
 
   const {values, errors, isValid, handleChange, resetForm} = useFormValidation();
 
@@ -22,28 +25,13 @@ const Popup: React.FC<IPopupProps> = observer(({onClose}) => {
     resetForm();
   }, [resetForm]);
 
-  function handleSubmitComment(name: string, comment: string, id: number) {
-    popup.setIsLoadingComment(true);
-    return mainApi.setNewComment({id, name, comment})
-      .then(() => {
-        const answerFromServer = {
-          id: Math.random(),
-          text: values.comment!,
-          date: dateParseFromTimestampToString(new Date().getTime())
-        };
-        photoGrid.setComments([...photoGrid.comments, answerFromServer]);
-        resetForm();
-      })
-      .catch((err) => console.log(err))
-      .finally(() => popup.setIsLoadingComment(false));
-  }
-
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     if (values.name === '' || values.comment === '') {
       return;
     }
-    handleSubmitComment(values.name!, values.comment!, photoGrid.originSizeImage.id!);
+    popup.setNewComment(popup.originSizeImage.id!, values.name!, values.comment!, resetForm);
+
   }
 
   return (
@@ -56,9 +44,9 @@ const Popup: React.FC<IPopupProps> = observer(({onClose}) => {
           type="button"
           onClick={onClose}
         />
-        <img className="popup__img" src={photoGrid.originSizeImage.url} alt="Картинка"/>
+        <img className="popup__img" src={popup.originSizeImage.url} alt="Картинка"/>
         <div className="popup__comments-container">
-          {photoGrid.comments && photoGrid.comments.map((comment) => (
+          {popup.comments && popup.comments.map((comment) => (
             <div key={comment.id} className="popup__comment-container">
               <p className="popup__comment popup__comment_type_date">{comment.date}</p>
               <p className="popup__comment">{comment.text}</p>

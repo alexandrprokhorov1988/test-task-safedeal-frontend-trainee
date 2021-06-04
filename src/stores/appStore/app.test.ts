@@ -1,4 +1,4 @@
-import app from '../store/app';
+import app from './/app';
 
 describe("app store", () => {
   it("setIsOpenPopup action", () => {

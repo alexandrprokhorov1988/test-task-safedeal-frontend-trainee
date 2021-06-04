@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import App from './App';
-import photoGrid from "../../store/photoGrid";
+import photoGrid from "../../stores/photoGridStore/photoGrid";
 
 describe('App component', () => {
   photoGrid.setCards(

@@ -2,7 +2,7 @@ import React from 'react';
 import {render, unmountComponentAtNode} from "react-dom";
 import renderer from 'react-test-renderer';
 import {act} from "react-dom/test-utils";
-import Image from './Image';
+import PhotoGridImage from './PhotoGridImage';
 
 let container: any = null;
 beforeEach(() => {
@@ -20,17 +20,17 @@ describe('Image component', () => {
   it('Должна находить className photo-grid-img', () => {
     const onChange = jest.fn();
     act(() => {
-      render(<Image id={237} url="#" onImageClick={onChange}/>, container);
+      render(<PhotoGridImage id={237} url="#" onImageClick={onChange}/>, container);
     });
-    expect(container.firstChild).toHaveClass("photo-grid-img");
+    expect(container.firstChild).toHaveClass("photo-grid-image");
   });
 
   it('Должна вызывать коллбэк функцию по click', () => {
     const onChange = jest.fn();
     act(() => {
-      render(<Image id={237} url="#" onImageClick={onChange}/>, container);
+      render(<PhotoGridImage id={237} url="#" onImageClick={onChange}/>, container);
     });
-    const image = document.querySelector(".photo-grid-img");
+    const image = document.querySelector(".photo-grid-image");
     act(() => {
       image?.dispatchEvent(new MouseEvent("click", {bubbles: true}));
     });
@@ -40,9 +40,9 @@ describe('Image component', () => {
   it('Должна вызывать коллбэк функцию по enter', () => {
     const onChange = jest.fn();
     act(() => {
-      render(<Image id={237} url="#" onImageClick={onChange}/>, container);
+      render(<PhotoGridImage id={237} url="#" onImageClick={onChange}/>, container);
     });
-    const image = document.querySelector(".photo-grid-img");
+    const image = document.querySelector(".photo-grid-image");
     act(() => {
       image?.dispatchEvent(new KeyboardEvent("keydown", {bubbles: true, key: 'Enter'}));
     });
@@ -51,7 +51,7 @@ describe('Image component', () => {
 
   it('Image snapshot', () => {
     const result = renderer
-      .create(<Image id={237} url="#" onImageClick={() => {
+      .create(<PhotoGridImage id={237} url="#" onImageClick={() => {
       }}/>)
       .toJSON();
     expect(result).toMatchSnapshot();

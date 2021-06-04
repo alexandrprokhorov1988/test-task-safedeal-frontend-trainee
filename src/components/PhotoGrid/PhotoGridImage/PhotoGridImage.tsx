@@ -1,13 +1,25 @@
 import React from 'react';
-import './Image.css';
+import './PhotoGridImage.css';
 
-interface IImage {
+type PhotoGridImageProps = {
+  /**
+   * Image id.
+   */
   id: number;
+  /**
+   * Image url.
+   */
   url: string;
+  /**
+   * Image handleClick.
+   */
   onImageClick: (id: number) => void;
 }
 
-const Image: React.FC<IImage> = ({id, url, onImageClick}) => {
+/**
+ * Image component.
+ */
+const PhotoGridImage: React.FC<PhotoGridImageProps> = ({id, url, onImageClick}) => {
 
   function handleImageClick(): void {
     onImageClick(id);
@@ -25,7 +37,7 @@ const Image: React.FC<IImage> = ({id, url, onImageClick}) => {
       key={id}
       src={url}
       alt="Картинка"
-      className="photo-grid-img"
+      className="photo-grid-image"
       onClick={handleImageClick}
       onKeyDown={handleKeyDown}
       tabIndex={0}
@@ -34,4 +46,4 @@ const Image: React.FC<IImage> = ({id, url, onImageClick}) => {
   );
 };
 
-export default React.memo(Image);
+export default React.memo(PhotoGridImage);

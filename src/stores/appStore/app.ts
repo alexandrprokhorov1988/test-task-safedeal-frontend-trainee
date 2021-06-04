@@ -1,5 +1,5 @@
 import {makeAutoObservable} from "mobx";
-import {autoSave} from "../utils/helpers";
+import {autoSave} from "../../utils/helpers";
 
 class App {
   public isOpenPopup = false;
