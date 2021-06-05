@@ -1,9 +1,9 @@
 import {makeAutoObservable} from "mobx";
 import {autoSave} from "../../utils/helpers";
-import photoGridService from '../photoGridStore/photoGrid.service';
+import photoGridStoreService from '../photoGridStore/photoGridStore.service';
 import {NOT_FOUND_ERR} from "../../utils/constants";
 
-class PhotoGrid {
+class PhotoGridStore {
   public cards: any[] = [];
 
   public isLoading = false;
@@ -22,10 +22,10 @@ class PhotoGrid {
   }
 
   public getInitialImages() {
-    this.isLoading = true;
-    return photoGridService.getInitialImages()
+    this.setIsLoading(true);
+    return photoGridStoreService.getInitialImages()
       .then((response) => {
-        this.cards = response.data;
+        this.setCards(response.data);
       })
       .catch((err) => {
         if (err.response.status === 404) {
@@ -35,9 +35,9 @@ class PhotoGrid {
         }
       })
       .finally(() => {
-        this.isLoading = false;
+        this.setIsLoading(false);
       })
   }
 }
 
-export default new PhotoGrid();
+export default new PhotoGridStore();

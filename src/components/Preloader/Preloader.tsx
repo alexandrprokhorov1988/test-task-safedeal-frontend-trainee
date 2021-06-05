@@ -1,5 +1,5 @@
 import React from 'react';
-import './Preloader.css';
+import style from './Preloader.module.scss';
 
 /**
  * Preloader component.
@@ -7,9 +7,9 @@ import './Preloader.css';
 const Preloader = () => {
 
   return (
-    <div className="preloader">
-      <div className="preloader__img"/>
-      <p className="preloader__text">Идет поиск фотографий...</p>
+    <div className={style.preloader}>
+      <div className={style.img}/>
+      <p className={style.text}>Идет поиск фотографий...</p>
     </div>
   );
 };

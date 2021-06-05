@@ -1,9 +1,9 @@
 import React from 'react';
 import {observer} from "mobx-react-lite";
-import './Popup.css';
+import style from './Popup.module.scss';
 import {useFormValidation} from "../../hooks/useFormValidation";
-import popup from '../../stores/popupStore/popup';
-import app from '../../stores/appStore/app';
+import popup from '../../stores/popupStore';
+import app from '../../stores/appStore';
 
 type PopupProps = {
   /**
@@ -31,35 +31,34 @@ const Popup: React.FC<PopupProps> = observer(({onClose}) => {
       return;
     }
     popup.setNewComment(popup.originSizeImage.id!, values.name!, values.comment!, resetForm);
-
   }
 
   return (
-    <div className={`popup ${app.isOpenPopup ? "popup_opened" : ""}`} onClick={onClose} role="button" tabIndex={-1}
+    <div className={`${style.popup} ${app.isOpenPopup ? style.opened : ""}`} onClick={onClose} role="button" tabIndex={-1}
          aria-hidden="true">
-      <div className="popup__container" onClick={(e) => e.stopPropagation()} role="complementary" tabIndex={-1}
+      <div className={style.container} onClick={(e) => e.stopPropagation()} role="complementary" tabIndex={-1}
            aria-hidden="true">
         <button
-          className="popup__close-button"
+          className={style.closeButton}
           type="button"
           onClick={onClose}
         />
-        <img className="popup__img" src={popup.originSizeImage.url} alt="Картинка"/>
-        <div className="popup__comments-container">
+        <img className={style.img} src={popup.originSizeImage.url} alt="Картинка"/>
+        <div className={style.commentsContainer}>
           {popup.comments && popup.comments.map((comment) => (
-            <div key={comment.id} className="popup__comment-container">
-              <p className="popup__comment popup__comment_type_date">{comment.date}</p>
-              <p className="popup__comment">{comment.text}</p>
+            <div key={comment.id} className={style.commentContainer}>
+              <p className={`${style.comment} ${style.commentTypeDate}`}>{comment.date}</p>
+              <p className={style.comment}>{comment.text}</p>
             </div>
           ))}
         </div>
-        <form className="popup__form" action="#" noValidate method="get" onSubmit={handleSubmit}>
+        <form className={style.form} action="#" noValidate method="get" onSubmit={handleSubmit}>
           <span
-            className={`popup__form-error ${!errors.name && 'popup__form-error_hide'}`}
+            className={`${style.formError} ${!errors.name ? style.formErrorHide : ""}`}
           >{errors.name || ''}</span>
           <input
             name="name"
-            className="popup__form-input"
+            className={style.formInput}
             type="text"
             placeholder="Ваше имя"
             value={values.name || ''}
@@ -70,11 +69,11 @@ const Popup: React.FC<PopupProps> = observer(({onClose}) => {
             pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s\-]+$"
           />
           <span
-            className={`popup__form-error ${!errors.comment && 'popup__form-error_hide'}`}
+            className={`${style.formError} ${!errors.comment ? style.formErrorHide : ""}`}
           >{errors.comment || ''}</span>
           <input
             name="comment"
-            className="popup__form-input"
+            className={style.formInput}
             type="text"
             placeholder="Ваш комментарий"
             value={values.comment || ''}
@@ -85,7 +84,7 @@ const Popup: React.FC<PopupProps> = observer(({onClose}) => {
             pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s\-]+$"
           />
           <button
-            className="popup__form-button"
+            className={style.formButton}
             type="submit"
             disabled={popup.isLoadingComment || !isValid}
           >{`${popup.isLoadingComment ? 'Добавление комментария' : 'Оставить комментарий'}`}

@@ -3,7 +3,7 @@ import {render, unmountComponentAtNode} from "react-dom";
 import renderer from 'react-test-renderer';
 import Popup from './Popup';
 import {act} from 'react-dom/test-utils';
-import popup from '../../stores/popupStore/popup';
+import popup from '../../stores/popupStore';
 
 let container: any = null;
 beforeEach(() => {

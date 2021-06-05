@@ -30,9 +30,9 @@ class PhotoGridService {
   }
 }
 
-const photoGridService = new PhotoGridService({
+const photoGridStoreService = new PhotoGridService({
   baseUrl: BASE_URL,
   headers: HEADERS
 });
 
-export default photoGridService;
+export default photoGridStoreService;

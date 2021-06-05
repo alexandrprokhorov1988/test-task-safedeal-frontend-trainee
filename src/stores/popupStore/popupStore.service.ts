@@ -38,9 +38,9 @@ class PopupService {
   }
 }
 
-const popupService = new PopupService({
+const popupStoreService = new PopupService({
   baseUrl: BASE_URL,
   headers: HEADERS
 });
 
-export default popupService;
+export default popupStoreService;

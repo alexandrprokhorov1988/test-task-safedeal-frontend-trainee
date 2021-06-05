@@ -1,5 +1,5 @@
 import React from 'react';
-import './PhotoGridImage.css';
+import style from './PhotoGridImage.module.scss';
 
 type PhotoGridImageProps = {
   /**
@@ -37,7 +37,7 @@ const PhotoGridImage: React.FC<PhotoGridImageProps> = ({id, url, onImageClick}) 
       key={id}
       src={url}
       alt="Картинка"
-      className="photo-grid-image"
+      className={style.photoGridImage}
       onClick={handleImageClick}
       onKeyDown={handleKeyDown}
       tabIndex={0}

@@ -1,23 +1,23 @@
 import React from 'react';
-import './App.css';
+import style from './App.module.css';
 import Header from '../Header';
 import Footer from '../Footer';
 import PhotoGrid from '../PhotoGrid';
-import Popup from "../Popup";
-import app from '../../stores/appStore/app';
+import Popup from '../Popup';
+import app from '../../stores/appStore';
 
 /**
  * App component.
  */
 const App = () => {
 
-  function handlePopupOpen(): void {
+  function handleOpenPopup(): void {
     app.setIsOpenPopup(true);
     document.addEventListener('keydown', handleEscClose);
     document.body.style.overflow = "hidden";
   }
 
-  function closePopup(): void {
+  function handleClosePopup(): void {
     app.setIsOpenPopup(false);
     document.removeEventListener('keydown', handleEscClose);
     document.body.style.overflow = "auto";
@@ -25,18 +25,18 @@ const App = () => {
 
   function handleEscClose(event: any): void {
     if (event.key === 'Escape') {
-      closePopup();
+      handleClosePopup();
     }
   }
 
   return (
-    <div className="page">
+    <div className={style.page}>
       <Header/>
       <main className="content">
-        <PhotoGrid onOpen={handlePopupOpen}/>
+        <PhotoGrid onOpen={handleOpenPopup}/>
       </main>
       <Footer/>
-      <Popup onClose={closePopup}/>
+      <Popup onClose={handleClosePopup}/>
     </div>
   );
 };

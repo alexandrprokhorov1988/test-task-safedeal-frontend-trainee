@@ -1,10 +1,10 @@
 import React from 'react';
 import {observer} from "mobx-react-lite";
-import './PhotoGrid.css';
+import style from './PhotoGrid.module.scss';
 import PhotoGridImage from './PhotoGridImage';
 import Preloader from '../Preloader';
-import photoGrid from '../../stores/photoGridStore/photoGrid';
-import popup from '../../stores/popupStore/popup';
+import photoGrid from '../../stores/photoGridStore';
+import popup from '../../stores/popupStore';
 
 type PhotoGridProps = {
   /**
@@ -35,7 +35,7 @@ const PhotoGrid: React.FC<PhotoGridProps> = observer(({onOpen}) => {
   }, []);
 
   return (
-    <section className="photo-grid">
+    <section className={style.photoGrid}>
       {photoGrid.isLoading ? <Preloader/> :
         <>
           {photoGrid.cards && photoGrid.cards.map((card: any) => (

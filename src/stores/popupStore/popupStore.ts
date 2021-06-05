@@ -1,9 +1,9 @@
 import {makeAutoObservable} from "mobx";
 import {autoSave, dateParseFromTimestampToString} from "../../utils/helpers";
-import popupService from '../popupStore/popup.service';
+import popupStoreService from '../popupStore/popupStore.service';
 import {NOT_FOUND_ERR} from "../../utils/constants";
 
-class Popup {
+class PopupStore {
   public isLoadingComment = false;
 
   public originSizeImage: { id?: number, url?: string } = {};
@@ -19,7 +19,7 @@ class Popup {
     this.isLoadingComment = state;
   }
 
-  public setOriginSizeImage(image: { id: number, url: string }) {
+  public setOriginSizeImage(image: { id?: number, url?: string }) {
     this.originSizeImage = image;
   }
 
@@ -28,11 +28,11 @@ class Popup {
   }
 
   public getOriginSizeImage(id: number, callBack: () => void) {
-    this.originSizeImage = {};
-    return popupService.getOriginalSizeImage(id)
+    this.setOriginSizeImage({});
+    return popupStoreService.getOriginalSizeImage(id)
       .then((response) => {
         const {id, url, comments} = response.data;
-        this.originSizeImage = {id, url};
+        this.setOriginSizeImage({id, url});
         const newComments = comments.map((comment: { text: string, date: number, id: number }) => ({
           text: comment.text,
           date: dateParseFromTimestampToString(comment.date),
@@ -51,8 +51,8 @@ class Popup {
   }
 
   public setNewComment(id: number, name: string, comment: string, callBack: () => void) {
-    this.isLoadingComment = true;
-    return popupService.setNewComment(id, name, comment)
+    this.setIsLoadingComment(true);
+    return popupStoreService.setNewComment(id, name, comment)
       .then(() => {
         const answerFromServer = {
           id: Math.random(),
@@ -70,9 +70,9 @@ class Popup {
         }
       })
       .finally(() => {
-        this.isLoadingComment = false;
+        this.setIsLoadingComment(false);
       })
   }
 }
 
-export default new Popup();
+export default new PopupStore();

@@ -1,4 +1,4 @@
-import photoGrid from './/photoGrid';
+import photoGrid from './photoGridStore';
 
 describe("photoGrid store", () => {
   it("setCards action", () => {

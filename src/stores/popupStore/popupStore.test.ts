@@ -1,4 +1,4 @@
-import popup from './/popup';
+import popup from './popupStore';
 
 describe("popup store", () => {
   it("setIsLoadingComment action", () => {
