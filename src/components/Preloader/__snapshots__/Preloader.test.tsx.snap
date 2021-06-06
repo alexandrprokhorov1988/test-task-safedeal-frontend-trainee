@@ -5,10 +5,10 @@ exports[`Preloader component Preloader component 1`] = `
   className="preloader"
 >
   <div
-    className="preloader__img"
+    className="img"
   />
   <p
-    className="preloader__text"
+    className="text"
   >
     Идет поиск фотографий...
   </p>

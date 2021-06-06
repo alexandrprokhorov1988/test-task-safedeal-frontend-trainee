@@ -23,7 +23,7 @@ describe('Popup component', () => {
     act(() => {
       render(<Popup onClose={onClose}/>, container);
     });
-    const buttonClose = document.querySelector(".popup__close-button");
+    const buttonClose = document.querySelector("[data-testid=close-button]");
     act(() => {
       buttonClose?.dispatchEvent(new MouseEvent("click", {bubbles: true}))
     });
@@ -35,7 +35,7 @@ describe('Popup component', () => {
       render(<Popup onClose={() => {
       }}/>, container);
     });
-    const buttonSubmit = document.querySelector(".popup__form-button");
+    const buttonSubmit = document.querySelector("[data-testid=submit-button]");
     act(() => {
       buttonSubmit?.dispatchEvent(new Event("submit", {bubbles: true, cancelable: true}))
     });

@@ -8,7 +8,7 @@ exports[`App component App snapshot 1`] = `
     className="header"
   >
     <h1
-      className="header__title"
+      className="title"
     >
       Test APP
     </h1>
@@ -17,11 +17,11 @@ exports[`App component App snapshot 1`] = `
     className="content"
   >
     <section
-      className="photo-grid"
+      className="photoGrid"
     >
       <img
         alt="Картинка"
-        className="photo-grid-image"
+        className="photoGridImage"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="presentation"
@@ -30,7 +30,7 @@ exports[`App component App snapshot 1`] = `
       />
       <img
         alt="Картинка"
-        className="photo-grid-image"
+        className="photoGridImage"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="presentation"
@@ -43,7 +43,7 @@ exports[`App component App snapshot 1`] = `
     className="footer"
   >
     <p
-      className="footer__text"
+      className="text"
     >
       © 2018-2019-2021
     </p>
@@ -57,37 +57,38 @@ exports[`App component App snapshot 1`] = `
   >
     <div
       aria-hidden="true"
-      className="popup__container"
+      className="container"
       onClick={[Function]}
       role="complementary"
       tabIndex={-1}
     >
       <button
-        className="popup__close-button"
+        className="closeButton"
+        data-testid="close-button"
         onClick={[Function]}
         type="button"
       />
       <img
         alt="Картинка"
-        className="popup__img"
+        className="img"
       />
       <div
-        className="popup__comments-container"
+        className="commentsContainer"
       />
       <form
         action="#"
-        className="popup__form"
+        className="form"
         method="get"
         noValidate={true}
         onSubmit={[Function]}
       >
         <span
-          className="popup__form-error popup__form-error_hide"
+          className="formError formErrorHide"
         >
           
         </span>
         <input
-          className="popup__form-input"
+          className="formInput"
           maxLength={200}
           minLength={2}
           name="name"
@@ -99,12 +100,12 @@ exports[`App component App snapshot 1`] = `
           value=""
         />
         <span
-          className="popup__form-error popup__form-error_hide"
+          className="formError formErrorHide"
         >
           
         </span>
         <input
-          className="popup__form-input"
+          className="formInput"
           maxLength={200}
           minLength={2}
           name="comment"
@@ -116,7 +117,8 @@ exports[`App component App snapshot 1`] = `
           value=""
         />
         <button
-          className="popup__form-button"
+          className="formButton"
+          data-testid="submit-button"
           disabled={true}
           type="submit"
         >

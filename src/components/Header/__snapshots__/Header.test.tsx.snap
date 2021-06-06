@@ -5,7 +5,7 @@ exports[`Header component Рендер Header snapshot 1`] = `
   className="header"
 >
   <h1
-    className="header__title"
+    className="title"
   >
     Test APP
   </h1>

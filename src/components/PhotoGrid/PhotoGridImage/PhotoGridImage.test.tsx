@@ -17,20 +17,12 @@ afterEach(() => {
 });
 
 describe('Image component', () => {
-  it('Должна находить className photo-grid-img', () => {
-    const onChange = jest.fn();
-    act(() => {
-      render(<PhotoGridImage id={237} url="#" onImageClick={onChange}/>, container);
-    });
-    expect(container.firstChild).toHaveClass("photo-grid-image");
-  });
-
   it('Должна вызывать коллбэк функцию по click', () => {
     const onChange = jest.fn();
     act(() => {
       render(<PhotoGridImage id={237} url="#" onImageClick={onChange}/>, container);
     });
-    const image = document.querySelector(".photo-grid-image");
+    const image = document.querySelector("img");
     act(() => {
       image?.dispatchEvent(new MouseEvent("click", {bubbles: true}));
     });
@@ -42,7 +34,7 @@ describe('Image component', () => {
     act(() => {
       render(<PhotoGridImage id={237} url="#" onImageClick={onChange}/>, container);
     });
-    const image = document.querySelector(".photo-grid-image");
+    const image = document.querySelector("img");
     act(() => {
       image?.dispatchEvent(new KeyboardEvent("keydown", {bubbles: true, key: 'Enter'}));
     });

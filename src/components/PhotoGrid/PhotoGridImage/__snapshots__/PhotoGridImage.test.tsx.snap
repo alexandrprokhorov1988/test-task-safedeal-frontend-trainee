@@ -3,7 +3,7 @@
 exports[`Image component Image snapshot 1`] = `
 <img
   alt="Картинка"
-  className="photo-grid-image"
+  className="photoGridImage"
   onClick={[Function]}
   onKeyDown={[Function]}
   role="presentation"

@@ -42,6 +42,7 @@ const Popup: React.FC<PopupProps> = observer(({onClose}) => {
           className={style.closeButton}
           type="button"
           onClick={onClose}
+          data-testid="close-button"
         />
         <img className={style.img} src={popup.originSizeImage.url} alt="Картинка"/>
         <div className={style.commentsContainer}>
@@ -87,6 +88,7 @@ const Popup: React.FC<PopupProps> = observer(({onClose}) => {
             className={style.formButton}
             type="submit"
             disabled={popup.isLoadingComment || !isValid}
+            data-testid="submit-button"
           >{`${popup.isLoadingComment ? 'Добавление комментария' : 'Оставить комментарий'}`}
           </button>
         </form>
