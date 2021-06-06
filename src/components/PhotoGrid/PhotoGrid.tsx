@@ -4,11 +4,10 @@ import style from './PhotoGrid.module.scss';
 import PhotoGridImage from './PhotoGridImage';
 import Preloader from '../Preloader';
 import photoGrid from '../../stores/photoGridStore';
-import popup from '../../stores/popupStore';
 
 type PhotoGridProps = {
   /**
-   * PhotoGrid handleOpen.
+   * App onOpen.
    */
   onOpen: () => void;
 }
@@ -19,15 +18,6 @@ type PhotoGridProps = {
 const PhotoGrid: React.FC<PhotoGridProps> = observer(({onOpen}) => {
 
   console.log('photogrid');// todo del
-
-  function handleGetOriginalSizeImage(imageId: number) {
-    if (imageId === popup.originSizeImage.id) {
-      onOpen();
-    } else {
-     popup.getOriginSizeImage(imageId, onOpen);
-    }
-    return true;
-  }
 
   React.useEffect(() => {
     console.log('запрос на сервер за карточками'); // todo del
@@ -43,7 +33,7 @@ const PhotoGrid: React.FC<PhotoGridProps> = observer(({onOpen}) => {
               key={card.id}
               id={card.id}
               url={card.url}
-              onImageClick={handleGetOriginalSizeImage}
+              onOpen={onOpen}
             />
           ))}
         </>

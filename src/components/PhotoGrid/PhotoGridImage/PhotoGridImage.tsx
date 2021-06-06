@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './PhotoGridImage.module.scss';
+import popup from "../../../stores/popupStore";
 
 type PhotoGridImageProps = {
   /**
@@ -13,21 +14,30 @@ type PhotoGridImageProps = {
   /**
    * Image handleClick.
    */
-  onImageClick: (id: number) => void;
+  onOpen: () => void;
 }
 
 /**
  * Image component.
  */
-const PhotoGridImage: React.FC<PhotoGridImageProps> = ({id, url, onImageClick}) => {
+const PhotoGridImage: React.FC<PhotoGridImageProps> = ({id, url, onOpen}) => {
+
+  function handleGetOriginalSizeImage(imageId: number) {
+    if (imageId === popup.originSizeImage.id) {
+      onOpen();
+    } else {
+      popup.getOriginSizeImage(imageId, onOpen);
+    }
+    return true;
+  }
 
   function handleImageClick(): void {
-    onImageClick(id);
+    handleGetOriginalSizeImage(id);
   }
 
   function handleKeyDown(e: React.KeyboardEvent): void | boolean {
     if (e.key === 'Enter') {
-      onImageClick(id);
+      handleGetOriginalSizeImage(id);
     }
     return false;
   }

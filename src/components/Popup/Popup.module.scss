@@ -1,3 +1,6 @@
+$font-size: 13px;
+$line-height: 15px;
+
 .popup {
   margin: 0 auto;
   position: fixed;
@@ -53,12 +56,10 @@
   transition: all ease .1s;
   cursor: pointer;
   transform: rotate(90deg);
-
 }
 
 .closeButton:hover {
   transform: rotate(180deg);
-
 }
 
 .img {
@@ -100,10 +101,10 @@
 }
 
 .comment {
+  font-size: $font-size;
+  line-height: $line-height;
   padding: 0;
   margin: 0;
-  font-size: 13px;
-  line-height: 15px;
   color: #000000;
   padding-top: 5px;
 }
@@ -124,8 +125,8 @@
   visibility: visible;
   color: #ff2b06;
   font-size: 9px;
-  height: 20px;
-  line-height: 20px;
+  height: $font-size + 7;
+  line-height: $line-height + 5;
 }
 
 .formErrorHide {
@@ -146,8 +147,8 @@
   background: #0a6bd0d9;
   border-radius: 3px;
   color: #FFFFFF;
-  font-size: 13px;
-  line-height: 15px;
+  font-size: $font-size;
+  line-height: $line-height;
   border: none;
   cursor: pointer;
   margin-top: 19px;

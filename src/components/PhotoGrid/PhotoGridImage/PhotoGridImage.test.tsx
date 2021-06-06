@@ -20,7 +20,7 @@ describe('Image component', () => {
   it('Должна вызывать коллбэк функцию по click', () => {
     const onChange = jest.fn();
     act(() => {
-      render(<PhotoGridImage id={237} url="#" onImageClick={onChange}/>, container);
+      render(<PhotoGridImage id={237} url="#" onOpen={onChange}/>, container);
     });
     const image = document.querySelector("img");
     act(() => {
@@ -32,7 +32,7 @@ describe('Image component', () => {
   it('Должна вызывать коллбэк функцию по enter', () => {
     const onChange = jest.fn();
     act(() => {
-      render(<PhotoGridImage id={237} url="#" onImageClick={onChange}/>, container);
+      render(<PhotoGridImage id={237} url="#" onOpen={onChange}/>, container);
     });
     const image = document.querySelector("img");
     act(() => {
@@ -43,7 +43,7 @@ describe('Image component', () => {
 
   it('Image snapshot', () => {
     const result = renderer
-      .create(<PhotoGridImage id={237} url="#" onImageClick={() => {
+      .create(<PhotoGridImage id={237} url="#" onOpen={() => {
       }}/>)
       .toJSON();
     expect(result).toMatchSnapshot();

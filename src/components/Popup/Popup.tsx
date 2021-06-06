@@ -21,10 +21,6 @@ const Popup: React.FC<PopupProps> = observer(({onClose}) => {
 
   console.log('popup');  // todo del
 
-  React.useEffect(() => {
-    resetForm();
-  }, [resetForm]);
-
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     if (values.name === '' || values.comment === '') {
@@ -33,15 +29,21 @@ const Popup: React.FC<PopupProps> = observer(({onClose}) => {
     popup.setNewComment(popup.originSizeImage.id!, values.name!, values.comment!, resetForm);
   }
 
+  function handleClose() {
+    onClose();
+    resetForm();
+  }
+
   return (
-    <div className={`${style.popup} ${app.isOpenPopup ? style.opened : ""}`} onClick={onClose} role="button" tabIndex={-1}
+    <div className={`${style.popup} ${app.isOpenPopup ? style.opened : ""}`} onClick={handleClose} role="button"
+         tabIndex={-1}
          aria-hidden="true">
       <div className={style.container} onClick={(e) => e.stopPropagation()} role="complementary" tabIndex={-1}
            aria-hidden="true">
         <button
           className={style.closeButton}
           type="button"
-          onClick={onClose}
+          onClick={handleClose}
           data-testid="close-button"
         />
         <img className={style.img} src={popup.originSizeImage.url} alt="Картинка"/>
