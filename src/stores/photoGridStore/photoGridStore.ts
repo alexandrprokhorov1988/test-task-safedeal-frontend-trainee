@@ -1,7 +1,8 @@
-import {makeAutoObservable} from "mobx";
-import {autoSave} from "../../utils/helpers";
-import photoGridStoreService from '../photoGridStore/photoGridStore.service';
-import {NOT_FOUND_ERR} from "../../utils/constants";
+import { makeAutoObservable } from 'mobx';
+
+import { autoSave } from '../../utils/helpers';
+import photoGridStoreService from './photoGridStore.service';
+import { NOT_FOUND_ERR } from '../../utils/constants';
 
 class PhotoGridStore {
   public cards: any[] = [];
@@ -13,15 +14,15 @@ class PhotoGridStore {
     autoSave(this, 'photoGridStore');
   }
 
-  public setIsLoading(state: boolean) {
+  public setIsLoading(state: boolean): void {
     this.isLoading = state;
   }
 
-  public setCards(arr: any[]) {
+  public setCards(arr: any[]): void {
     this.cards = arr;
   }
 
-  public getInitialImages() {
+  public getInitialImages(): Promise<void> {
     this.setIsLoading(true);
     return photoGridStoreService.getInitialImages()
       .then((response) => {
@@ -29,14 +30,14 @@ class PhotoGridStore {
       })
       .catch((err) => {
         if (err.response.status === 404) {
-          console.log(NOT_FOUND_ERR)
+          console.log(NOT_FOUND_ERR);
         } else {
           console.log(err.message);
         }
       })
       .finally(() => {
         this.setIsLoading(false);
-      })
+      });
   }
 }
 

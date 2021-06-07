@@ -4,6 +4,7 @@ exports[`Popup component Popup snapshot 1`] = `
 <div
   aria-hidden="true"
   className="popup "
+  data-testid="popup-background"
   onClick={[Function]}
   role="button"
   tabIndex={-1}
@@ -16,6 +17,7 @@ exports[`Popup component Popup snapshot 1`] = `
     tabIndex={-1}
   >
     <button
+      aria-label="Close"
       className="closeButton"
       data-testid="close-button"
       onClick={[Function]}

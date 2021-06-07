@@ -1,13 +1,13 @@
 import popup from './popupStore';
 
-describe("popup store", () => {
-  it("setIsLoadingComment action", () => {
+describe('popup store', () => {
+  it('setIsLoadingComment action', () => {
     popup.setIsLoadingComment(true);
     expect(popup.isLoadingComment).toEqual(true);
   });
 
-  it("setComments action", () => {
-    popup.setComments([{id: 1, text: "text1", date: "date1"}]);
-    expect(popup.comments).toEqual([{id: 1, text: "text1", date: "date1"}]);
+  it('setComments action', () => {
+    popup.setComments([{ id: 1, text: 'text1', date: 'date1' }]);
+    expect(popup.comments).toEqual([{ id: 1, text: 'text1', date: 'date1' }]);
   });
 });

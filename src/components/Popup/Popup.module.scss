@@ -56,10 +56,10 @@ $line-height: 15px;
   transition: all ease .1s;
   cursor: pointer;
   transform: rotate(90deg);
-}
 
-.closeButton:hover {
-  transform: rotate(180deg);
+  &:hover {
+    transform: rotate(180deg);
+  }
 }
 
 .img {
@@ -152,16 +152,16 @@ $line-height: 15px;
   border: none;
   cursor: pointer;
   margin-top: 19px;
-}
 
-.formButton:hover {
-  background: #0a54a8;
-}
+  &:hover {
+    background: #0a54a8;
+  }
 
-.formButton:disabled {
-  background: #4997D0;
-  cursor: none;
-  pointer-events: none;
+  &:disabled {
+    background: #4997D0;
+    cursor: none;
+    pointer-events: none;
+  }
 }
 
 @media screen and (max-width: 425px) {

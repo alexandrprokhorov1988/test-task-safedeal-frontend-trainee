@@ -1,1 +1,1 @@
-export {default} from './photoGridStore';
+export { default } from './photoGridStore';

@@ -1,2 +1,2 @@
-export {default} from './PhotoGrid';
-export {default as PhotoGridImage} from './PhotoGridImage';
+export { default } from './PhotoGrid';
+export { default as PhotoGridImage } from './PhotoGridImage';

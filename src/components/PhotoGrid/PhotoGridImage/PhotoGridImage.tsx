@@ -1,6 +1,7 @@
 import React from 'react';
+
 import style from './PhotoGridImage.module.scss';
-import popup from "../../../stores/popupStore";
+import popup from '../../../stores/popupStore';
 
 type PhotoGridImageProps = {
   /**
@@ -15,14 +16,13 @@ type PhotoGridImageProps = {
    * Image handleClick.
    */
   onOpen: () => void;
-}
+};
 
 /**
  * Image component.
  */
-const PhotoGridImage: React.FC<PhotoGridImageProps> = ({id, url, onOpen}) => {
-
-  function handleGetOriginalSizeImage(imageId: number) {
+const PhotoGridImage: React.FC<PhotoGridImageProps> = ({ id, url, onOpen }) => {
+  function handleGetOriginalSizeImage(imageId: number): void | boolean {
     if (imageId === popup.originSizeImage.id) {
       onOpen();
     } else {

@@ -1,7 +1,8 @@
 import React from 'react';
-import {observer} from "mobx-react-lite";
+import { observer } from 'mobx-react-lite';
+
 import style from './Popup.module.scss';
-import {useFormValidation} from "../../hooks/useFormValidation";
+import useFormValidation from '../../hooks/useFormValidation';
 import popup from '../../stores/popupStore';
 import app from '../../stores/appStore';
 
@@ -10,16 +11,17 @@ type PopupProps = {
    * Popup handleClose.
    */
   onClose: () => void;
-}
+};
 
 /**
  * Popup component.
  */
-const Popup: React.FC<PopupProps> = observer(({onClose}) => {
+const Popup: React.FC<PopupProps> = observer(({ onClose }) => {
+  const {
+    values, errors, isValid, handleChange, resetForm,
+  } = useFormValidation();
 
-  const {values, errors, isValid, handleChange, resetForm} = useFormValidation();
-
-  console.log('popup');  // todo del
+  console.log('popup'); // todo del
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
@@ -29,24 +31,35 @@ const Popup: React.FC<PopupProps> = observer(({onClose}) => {
     popup.setNewComment(popup.originSizeImage.id!, values.name!, values.comment!, resetForm);
   }
 
-  function handleClose() {
+  function handleClose(): void {
     onClose();
     resetForm();
   }
 
   return (
-    <div className={`${style.popup} ${app.isOpenPopup ? style.opened : ""}`} onClick={handleClose} role="button"
-         tabIndex={-1}
-         aria-hidden="true">
-      <div className={style.container} onClick={(e) => e.stopPropagation()} role="complementary" tabIndex={-1}
-           aria-hidden="true">
+    <div
+      className={`${style.popup} ${app.isOpenPopup ? style.opened : ''}`}
+      onClick={handleClose}
+      role="button"
+      tabIndex={-1}
+      aria-hidden="true"
+      data-testid="popup-background"
+    >
+      <div
+        className={style.container}
+        onClick={(e) => e.stopPropagation()}
+        role="complementary"
+        tabIndex={-1}
+        aria-hidden="true"
+      >
         <button
           className={style.closeButton}
           type="button"
           onClick={handleClose}
           data-testid="close-button"
+          aria-label="Close"
         />
-        <img className={style.img} src={popup.originSizeImage.url} alt="Картинка"/>
+        <img className={style.img} src={popup.originSizeImage.url} alt="Картинка" />
         <div className={style.commentsContainer}>
           {popup.comments && popup.comments.map((comment) => (
             <div key={comment.id} className={style.commentContainer}>
@@ -57,8 +70,9 @@ const Popup: React.FC<PopupProps> = observer(({onClose}) => {
         </div>
         <form className={style.form} action="#" noValidate method="get" onSubmit={handleSubmit}>
           <span
-            className={`${style.formError} ${!errors.name ? style.formErrorHide : ""}`}
-          >{errors.name || ''}</span>
+            className={`${style.formError} ${!errors.name ? style.formErrorHide : ''}`}
+          >{errors.name || ''}
+          </span>
           <input
             name="name"
             className={style.formInput}
@@ -72,8 +86,9 @@ const Popup: React.FC<PopupProps> = observer(({onClose}) => {
             pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s\-]+$"
           />
           <span
-            className={`${style.formError} ${!errors.comment ? style.formErrorHide : ""}`}
-          >{errors.comment || ''}</span>
+            className={`${style.formError} ${!errors.comment ? style.formErrorHide : ''}`}
+          >{errors.comment || ''}
+          </span>
           <input
             name="comment"
             className={style.formInput}
@@ -100,4 +115,3 @@ const Popup: React.FC<PopupProps> = observer(({onClose}) => {
 });
 
 export default React.memo(Popup);
-

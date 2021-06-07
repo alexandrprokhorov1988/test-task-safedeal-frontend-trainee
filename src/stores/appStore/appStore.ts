@@ -1,15 +1,16 @@
-import {makeAutoObservable} from "mobx";
-import {autoSave} from "../../utils/helpers";
+import { makeAutoObservable } from 'mobx';
+
+import { autoSave } from '../../utils/helpers';
 
 class App {
   public isOpenPopup = false;
 
   constructor() {
     makeAutoObservable(this);
-    autoSave(this, 'appStore')
+    autoSave(this, 'appStore');
   }
 
-  setIsOpenPopup(state: boolean) {
+  setIsOpenPopup(state: boolean): void {
     this.isOpenPopup = state;
   }
 }

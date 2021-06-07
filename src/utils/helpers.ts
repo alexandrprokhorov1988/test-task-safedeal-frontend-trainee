@@ -1,8 +1,8 @@
-import {autorun, set, toJS} from 'mobx';
+import { autorun, set, toJS } from 'mobx';
 
 const dateParseFromTimestampToString = (timestamp: number) => {
   const date = new Date(timestamp);
-  const dayAndMonth = date.toLocaleString(undefined, {day: 'numeric', month: 'numeric', year:'numeric'});
+  const dayAndMonth = date.toLocaleString(undefined, { day: 'numeric', month: 'numeric', year: 'numeric' });
   return `${dayAndMonth}`;
 };
 
@@ -14,10 +14,10 @@ function autoSave(_this: any, name: string) {
   autorun(() => {
     const value = toJS(_this);
     localStorage.setItem(name, JSON.stringify(value));
-  })
+  });
 }
 
 export {
   dateParseFromTimestampToString,
   autoSave,
-}
+};

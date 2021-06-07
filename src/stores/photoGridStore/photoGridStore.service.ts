@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {BASE_URL, HEADERS} from '../../utils/config';
+
+import { BASE_URL, HEADERS } from '../../utils/config';
 
 type IMainApi = {
   baseUrl: string;
@@ -7,32 +8,33 @@ type IMainApi = {
     'Accept'?: string,
     'Content-Type'?: string,
   };
-}
+};
 
 class PhotoGridService {
+  private readonly baseurl: string;
 
-  private readonly _baseurl: string;
-
-  private readonly _headers: {
+  private readonly headers: {
     'Accept'?: string,
     'Content-Type'?: string,
   };
 
-  constructor({baseUrl, headers}: IMainApi) {
-    this._baseurl = baseUrl;
-    this._headers = headers;
+  constructor({ baseUrl, headers }: IMainApi) {
+    this.baseurl = baseUrl;
+    this.headers = headers;
   }
 
-  getInitialImages() {
-    return axios.get(`${this._baseurl}`, {
-      headers: this._headers
-    })
+  getInitialImages(): Promise<{ data: { id: number, url: string }[] }> {
+    return axios({
+      method: 'get',
+      url: `${this.baseurl}`,
+      headers: this.headers,
+    });
   }
 }
 
 const photoGridStoreService = new PhotoGridService({
   baseUrl: BASE_URL,
-  headers: HEADERS
+  headers: HEADERS,
 });
 
 export default photoGridStoreService;

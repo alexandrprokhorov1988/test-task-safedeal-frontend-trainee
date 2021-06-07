@@ -1,7 +1,8 @@
-import {makeAutoObservable} from "mobx";
-import {autoSave, dateParseFromTimestampToString} from "../../utils/helpers";
-import popupStoreService from '../popupStore/popupStore.service';
-import {NOT_FOUND_ERR} from "../../utils/constants";
+import { makeAutoObservable } from 'mobx';
+
+import { autoSave, dateParseFromTimestampToString } from '../../utils/helpers';
+import popupStoreService from './popupStore.service';
+import { NOT_FOUND_ERR } from '../../utils/constants';
 
 class PopupStore {
   public isLoadingComment = false;
@@ -15,63 +16,63 @@ class PopupStore {
     autoSave(this, 'popupStore');
   }
 
-  setIsLoadingComment(state: boolean) {
+  setIsLoadingComment(state: boolean): void {
     this.isLoadingComment = state;
   }
 
-  public setOriginSizeImage(image: { id?: number, url?: string }) {
+  public setOriginSizeImage(image: { id?: number, url?: string }): void {
     this.originSizeImage = image;
   }
 
-  public setComments(comments: { id: number, text: string, date: string }[]) {
+  public setComments(comments: { id: number, text: string, date: string }[]): void {
     this.comments = comments;
   }
 
-  public getOriginSizeImage(id: number, callBack: () => void) {
+  public getOriginSizeImage(imgId: number, callBack: () => void): Promise<void> {
     this.setOriginSizeImage({});
-    return popupStoreService.getOriginalSizeImage(id)
+    return popupStoreService.getOriginalSizeImage(imgId)
       .then((response) => {
-        const {id, url, comments} = response.data;
-        this.setOriginSizeImage({id, url});
+        const { id, url, comments } = response.data;
+        this.setOriginSizeImage({ id, url });
         const newComments = comments.map((comment: { text: string, date: number, id: number }) => ({
           text: comment.text,
           date: dateParseFromTimestampToString(comment.date),
-          id: comment.id
+          id: comment.id,
         }));
         this.setComments(newComments);
         callBack();
       })
       .catch((err) => {
         if (err.response.status === 404) {
-          console.log(NOT_FOUND_ERR)
+          console.log(NOT_FOUND_ERR);
         } else {
           console.log(err.message);
         }
-      })
+      });
   }
 
-  public setNewComment(id: number, name: string, comment: string, callBack: () => void) {
+  public setNewComment(id: number, name: string, comment: string, callBack: () => void): Promise<void> {
     this.setIsLoadingComment(true);
     return popupStoreService.setNewComment(id, name, comment)
       .then(() => {
         const answerFromServer = {
           id: Math.random(),
           text: comment,
-          date: dateParseFromTimestampToString(new Date().getTime())
+          date: dateParseFromTimestampToString(new Date().getTime()),
         };
         this.setComments([...this.comments, answerFromServer]);
         callBack();
       })
       .catch((err) => {
         if (err.response.status === 404) {
-          console.log(NOT_FOUND_ERR)
+          console.log(NOT_FOUND_ERR);
         } else {
           console.log(err.message);
         }
       })
       .finally(() => {
         this.setIsLoadingComment(false);
-      })
+      });
   }
 }
 
