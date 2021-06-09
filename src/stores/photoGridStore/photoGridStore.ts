@@ -22,9 +22,9 @@ class PhotoGridStore {
     this.cards = arr;
   }
 
-  public getInitialImages(): Promise<void> {
+  public getInitialImages(): void {
     this.setIsLoading(true);
-    return photoGridStoreService.getInitialImages()
+    photoGridStoreService.getInitialImages()
       .then((response) => {
         this.setCards(response.data);
       })

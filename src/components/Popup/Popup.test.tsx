@@ -2,6 +2,7 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import renderer from 'react-test-renderer';
 import { act } from 'react-dom/test-utils';
+import { fireEvent, render as tlRender } from '@testing-library/react'
 
 import Popup from './Popup';
 import popup from '../../stores/popupStore';
@@ -19,6 +20,16 @@ afterEach(() => {
 });
 
 describe('Popup component', () => {
+  it('Popup snapshot', () => {
+    popup.setOriginSizeImage({ id: 1, url: '#/test1' });
+    popup.setComments([{ text: 'text1', date: 'date1', id: 1 }]);
+    const result = renderer
+      .create(<Popup onClose={() => {
+      }}
+      />).toJSON();
+    expect(result).toMatchSnapshot();
+  });
+
   it('Должна вызывать коллбэк функцию по click на кнопку закрытия попапа', () => {
     const onClose = jest.fn();
     act(() => {
@@ -58,13 +69,23 @@ describe('Popup component', () => {
     popup.setIsLoadingComment(false);
   });
 
-  it('Popup snapshot', () => {
-    popup.setOriginSizeImage({ id: 1, url: '#/test1' });
-    popup.setComments([{ text: 'text1', date: 'date1', id: 1 }]);
-    const result = renderer
-      .create(<Popup onClose={() => {
-      }}
-      />).toJSON();
-    expect(result).toMatchSnapshot();
+  it('Должна записывать и удалять значение в input-name', () => {
+    const result = tlRender(<Popup onClose={() => {
+    }} />);
+    const input = result.getByTestId('input-name') as HTMLInputElement;
+    fireEvent.change(input, { target: { value: 'testName' } });
+    expect(input.value).toBe('testName');
+    fireEvent.change(input, { target: { value: '' } });
+    expect(input.value).toBe('');
+  });
+
+  it('Должна записывать и удалять значение в input-comment', () => {
+    const result = tlRender(<Popup onClose={() => {
+    }} />);
+    const input = result.getByTestId('input-name') as HTMLInputElement;
+    fireEvent.change(input, { target: { value: 'testComment' } });
+    expect(input.value).toBe('testComment');
+    fireEvent.change(input, { target: { value: '' } });
+    expect(input.value).toBe('');
   });
 });

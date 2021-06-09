@@ -1,6 +1,6 @@
 import photoGrid from './photoGridStore';
 
-describe('photoGrid store', () => {
+describe('photoGridStore', () => {
   it('setCards action', () => {
     photoGrid.setCards([{ id: 1, url: 'test_1' }]);
     expect(photoGrid.cards).toEqual([{ id: 1, url: 'test_1' }]);

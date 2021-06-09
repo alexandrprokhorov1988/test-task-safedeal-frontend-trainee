@@ -62,7 +62,7 @@ const Popup: React.FC<PopupProps> = observer(({ onClose }) => {
         <img className={style.img} src={popup.originSizeImage.url} alt="Картинка" />
         <div className={style.commentsContainer}>
           {popup.comments && popup.comments.map((comment) => (
-            <div key={comment.id} className={style.commentContainer}>
+            <div key={comment.id} className={style.commentContainer} >
               <p className={`${style.comment} ${style.commentTypeDate}`}>{comment.date}</p>
               <p className={style.comment}>{comment.text}</p>
             </div>
@@ -84,6 +84,7 @@ const Popup: React.FC<PopupProps> = observer(({ onClose }) => {
             minLength={2}
             maxLength={200}
             pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s\-]+$"
+            data-testid="input-name"
           />
           <span
             className={`${style.formError} ${!errors.comment ? style.formErrorHide : ''}`}
@@ -100,6 +101,7 @@ const Popup: React.FC<PopupProps> = observer(({ onClose }) => {
             minLength={2}
             maxLength={200}
             pattern="^[а-яёА-ЯЁa-zA-Z0-9-\s\-]+$"
+            data-testid="input-comment"
           />
           <button
             className={style.formButton}

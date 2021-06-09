@@ -28,9 +28,9 @@ class PopupStore {
     this.comments = comments;
   }
 
-  public getOriginSizeImage(imgId: number, callBack: () => void): Promise<void> {
+  public getOriginSizeImage(imgId: number, callBack: () => void): void {
     this.setOriginSizeImage({});
-    return popupStoreService.getOriginalSizeImage(imgId)
+    popupStoreService.getOriginalSizeImage(imgId)
       .then((response) => {
         const { id, url, comments } = response.data;
         this.setOriginSizeImage({ id, url });
@@ -51,9 +51,9 @@ class PopupStore {
       });
   }
 
-  public setNewComment(id: number, name: string, comment: string, callBack: () => void): Promise<void> {
+  public setNewComment(id: number, name: string, comment: string, callBack: () => void): void {
     this.setIsLoadingComment(true);
-    return popupStoreService.setNewComment(id, name, comment)
+    popupStoreService.setNewComment(id, name, comment)
       .then(() => {
         const answerFromServer = {
           id: Math.random(),

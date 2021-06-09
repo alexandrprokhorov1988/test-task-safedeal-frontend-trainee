@@ -60,6 +60,7 @@ exports[`Popup component Popup snapshot 1`] = `
       </span>
       <input
         className="formInput"
+        data-testid="input-name"
         maxLength={200}
         minLength={2}
         name="name"
@@ -77,6 +78,109 @@ exports[`Popup component Popup snapshot 1`] = `
       </span>
       <input
         className="formInput"
+        data-testid="input-comment"
+        maxLength={200}
+        minLength={2}
+        name="comment"
+        onChange={[Function]}
+        pattern="^[а-яёА-ЯЁa-zA-Z0-9-\\\\s\\\\-]+$"
+        placeholder="Ваш комментарий"
+        required={true}
+        type="text"
+        value=""
+      />
+      <button
+        className="formButton"
+        data-testid="submit-button"
+        disabled={true}
+        type="submit"
+      >
+        Оставить комментарий
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`Popup component Popup snapshot 2`] = `
+<div
+  aria-hidden="true"
+  className="popup "
+  data-testid="popup-background"
+  onClick={[Function]}
+  role="button"
+  tabIndex={-1}
+>
+  <div
+    aria-hidden="true"
+    className="container"
+    onClick={[Function]}
+    role="complementary"
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close"
+      className="closeButton"
+      data-testid="close-button"
+      onClick={[Function]}
+      type="button"
+    />
+    <img
+      alt="Картинка"
+      className="img"
+      src="#/test1"
+    />
+    <div
+      className="commentsContainer"
+    >
+      <div
+        className="commentContainer"
+      >
+        <p
+          className="comment commentTypeDate"
+        >
+          date1
+        </p>
+        <p
+          className="comment"
+        >
+          text1
+        </p>
+      </div>
+    </div>
+    <form
+      action="#"
+      className="form"
+      method="get"
+      noValidate={true}
+      onSubmit={[Function]}
+    >
+      <span
+        className="formError formErrorHide"
+      >
+        
+      </span>
+      <input
+        className="formInput"
+        data-testid="input-name"
+        maxLength={200}
+        minLength={2}
+        name="name"
+        onChange={[Function]}
+        pattern="^[а-яёА-ЯЁa-zA-Z0-9-\\\\s\\\\-]+$"
+        placeholder="Ваше имя"
+        required={true}
+        type="text"
+        value=""
+      />
+      <span
+        className="formError formErrorHide"
+      >
+        
+      </span>
+      <input
+        className="formInput"
+        data-testid="input-comment"
         maxLength={200}
         minLength={2}
         name="comment"
